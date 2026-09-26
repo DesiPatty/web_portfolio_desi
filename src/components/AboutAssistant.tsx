@@ -1,255 +1,476 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { 
-  Star, 
-  Gamepad2, 
-  Paintbrush, 
-  Cog, 
-  Sparkles 
-} from 'lucide-react';
-import { IMAGES } from '../data/portfolioData';
+import { PortfolioItem, ServiceItem, PipelineStep, Benefit, TestimonialItem, FaqItem } from '../types';
 
-export const AboutAssistant: React.FC = () => {
-  return (
-    <section id="about" className="relative py-20 lg:py-28 bg-black text-[#faf6f0] overflow-hidden border-t border-white/5">
-      {/* Background ambient lighting */}
-      <div className="pointer-events-none absolute -top-40 right-1/4 h-96 w-96 rounded-full bg-[#ff7865]/10 blur-[150px]" />
-      <div className="pointer-events-none absolute bottom-0 left-10 h-80 w-80 rounded-full bg-[#f472b6]/10 blur-[140px]" />
+// Asset imports
+import hero from '../assets/images/hero_anime_landscape_1790377945392.jpg';
+import avatar from '../assets/images/artist_avatar_1789270469437.jpg';
+import aboutPortrait from '../assets/images/desipatty_photo.png';
+import chibiCharacter from '../assets/images/desi_hero_character_1790376498667.png';
+import uiGiftKit from '../assets/images/ui_starter_kit_preview_1790349042555.jpg';
+import gameUi from '../assets/images/portfolio_game_ui_1789270481710.jpg';
+import characters from '../assets/images/portfolio_characters_1789270492091.jpg';
+import environment from '../assets/images/portfolio_environment_1789270501242.jpg';
+import assets from '../assets/images/portfolio_game_assets_1789270515035.jpg';
+import promo from '../assets/images/portfolio_promo_art_1790270525607.jpg';
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
-        {/* Top Tag / Badge */}
-        <div className="flex justify-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#f43f5e]/30 bg-[#221020]/90 px-4 py-1 text-xs font-semibold text-[#ff8a7a] shadow-md backdrop-blur-md">
-            <span className="text-xs">🧶</span>
-            <span>02 · Sobre mí</span>
-            <span className="text-xs">🪡</span>
-            <span className="text-xs">✦</span>
-          </div>
-        </div>
-
-        {/* Section Headline matching exact colors from reference */}
-        <div className="mt-4 text-center max-w-4xl mx-auto">
-          <h2 className="font-heading text-3xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.12]">
-            Una Artista 2D <span className="text-[#ff7865]">Dedicada a los</span>
-            <br />
-            Sprints de <span className="text-[#f472b6]">tu Estudio</span>
-          </h2>
-
-          {/* Subtitle with highlighted yellow phrase */}
-          <p className="mt-5 max-w-3xl mx-auto text-base sm:text-lg text-white/80 leading-relaxed">
-            Me integro a equipos indie para crear arte visual de alta calidad, resolver necesidades específicas y entregar{' '}
-            <span className="font-semibold text-[#f6c177]">assets listos para producción</span>.
-          </p>
-        </div>
-
-        {/* Main Content Layout: Left Card + Right 2x2 Feature Grid */}
-        <div className="mt-14 grid items-stretch gap-8 lg:grid-cols-12">
-          
-          {/* Left: Large Portrait Card with Floating Sparkles */}
-          <div className="lg:col-span-5 relative flex items-center justify-center">
-            {/* Floating Sparkle Stars around Card */}
-            <div className="pointer-events-none absolute -top-3 left-4 text-[#ff8a7a] animate-pulse">
-              <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
-                <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
-              </svg>
-            </div>
-            <div className="pointer-events-none absolute top-10 -right-2 text-[#ff9e7d] animate-pulse">
-              <svg className="w-7 h-7 fill-current" viewBox="0 0 24 24">
-                <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
-              </svg>
-            </div>
-            <div className="pointer-events-none absolute top-1/2 -right-4 text-[#ff7865] animate-pulse">
-              <svg className="w-8 h-8 fill-current" viewBox="0 0 24 24">
-                <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
-              </svg>
-            </div>
-            <div className="pointer-events-none absolute -bottom-3 right-8 text-[#f6c177] animate-pulse">
-              <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
-                <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
-              </svg>
-            </div>
-
-            {/* Main Portrait Frame */}
-            <div className="group relative w-full h-full min-h-[480px] sm:min-h-[540px] overflow-hidden rounded-[2rem] border-2 border-white/10 bg-[#161224] p-3 shadow-2xl transition-all duration-500 hover:border-[#ff8a7a]/40">
-              <div className="relative h-full w-full overflow-hidden rounded-[1.6rem] bg-[#1a1426]">
-                <img
-                  src={IMAGES.aboutPortrait}
-                  alt="DesiPatty en su taller de arte para videojuegos"
-                  referrerPolicy="no-referrer"
-                  className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-103"
-                />
-                
-                {/* Subtle vignette shadow at bottom */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#120e1d]/70 via-transparent to-transparent pointer-events-none" />
-              </div>
-            </div>
-          </div>
-
-          {/* Right: Feature / Experience Grid (2x2) */}
-          <div className="lg:col-span-7 relative flex flex-col justify-center">
-            
-            {/* Cute Sketched Cat in top-right corner */}
-            <div className="absolute -top-14 right-2 hidden sm:block pointer-events-none select-none">
-              {/* Radiating playful lines */}
-              <div className="flex justify-end pr-8 gap-1.5 text-purple-400 text-xs font-mono font-bold opacity-80">
-                <span>\</span>
-                <span>|</span>
-                <span>/</span>
-              </div>
-              {/* Sketched sleeping/friendly cat */}
-              <svg className="w-36 h-20 text-purple-400/80" viewBox="0 0 140 80" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                {/* Cat back and body */}
-                <path d="M 40 60 C 35 40, 55 25, 80 25 C 105 25, 125 35, 130 55 C 132 68, 120 72, 95 72 C 65 72, 45 72, 40 60 Z" />
-                {/* Ears */}
-                <path d="M 60 27 L 55 10 L 72 22" />
-                <path d="M 88 22 L 105 10 L 100 27" />
-                {/* Happy curved eyes */}
-                <path d="M 68 38 Q 75 32 82 38" />
-                <path d="M 92 38 Q 99 32 106 38" />
-                {/* Cute nose and mouth */}
-                <path d="M 87 43 L 87 46 M 83 48 Q 87 51 91 48" />
-                {/* Whiskers */}
-                <path d="M 62 44 L 46 41 M 62 48 L 44 50 M 63 52 L 48 57" />
-                <path d="M 108 44 L 124 41 M 108 48 L 126 50 M 107 52 L 122 57" />
-                {/* Front paws tucked */}
-                <path d="M 65 62 C 65 68, 76 68, 76 62" />
-                <path d="M 90 62 C 90 68, 101 68, 101 62" />
-                {/* Tail curled around */}
-                <path d="M 130 58 C 138 58, 140 70, 128 74 C 118 76, 106 73, 100 72" />
-              </svg>
-            </div>
-
-            {/* 2x2 Grid */}
-            <div className="grid gap-5 sm:grid-cols-2">
-              
-              {/* Card 1: 10+ Años de experiencia */}
-              <div className="group rounded-3xl border border-white/10 bg-[#191325]/90 p-6 sm:p-7 shadow-xl backdrop-blur-md transition-all duration-300 hover:border-[#ff7865]/40 hover:-translate-y-1 hover:bg-[#1d162c]">
-                {/* Icon box + hand-drawn accent lines */}
-                <div className="flex items-start justify-between">
-                  <div>
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#ef4444]/40 bg-gradient-to-br from-[#7f1d1d]/60 to-[#450a0a]/90 text-[#ff7865] shadow-lg shadow-[#ef4444]/15">
-                      <Star className="h-7 w-7 fill-current text-[#ff7865]" />
-                    </div>
-                    {/* Hand-drawn radial rays */}
-                    <div className="flex items-center gap-1.5 mt-2 pl-2 text-xs font-bold text-[#ff7865]">
-                      <span>/</span>
-                      <span>|</span>
-                      <span>\</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-2">
-                  <span className="font-heading text-3xl sm:text-4xl font-extrabold text-white">
-                    10+
-                  </span>
-                  <h3 className="text-sm font-bold text-[#ff7865] mt-0.5">
-                    Años de experiencia
-                  </h3>
-                  <p className="mt-2.5 text-xs sm:text-[13px] text-white/70 leading-relaxed">
-                    Más de una década trabajando en ilustración, diseño gráfico, 2D, 3D y producción de assets digitales.
-                  </p>
-                </div>
-              </div>
-
-              {/* Card 2: 2D + 3D Producción para videojuegos */}
-              <div className="group rounded-3xl border border-white/10 bg-[#14152a]/90 p-6 sm:p-7 shadow-xl backdrop-blur-md transition-all duration-300 hover:border-[#818cf8]/40 hover:-translate-y-1 hover:bg-[#181932]">
-                {/* Icon box + hand-drawn accent lines */}
-                <div className="flex items-start justify-between">
-                  <div>
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#6366f1]/40 bg-gradient-to-br from-[#1e1b4b]/60 to-[#312e81]/90 text-[#818cf8] shadow-lg shadow-[#6366f1]/15">
-                      <Gamepad2 className="h-7 w-7 text-[#818cf8]" />
-                    </div>
-                    {/* Hand-drawn radial rays */}
-                    <div className="flex items-center gap-1.5 mt-2 pl-2 text-xs font-bold text-[#818cf8]">
-                      <span>/</span>
-                      <span>|</span>
-                      <span>\</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-2">
-                  <span className="font-heading text-3xl sm:text-4xl font-extrabold text-white">
-                    2D + 3D
-                  </span>
-                  <h3 className="text-sm font-bold text-[#818cf8] mt-0.5">
-                    Producción para videojuegos
-                  </h3>
-                  <p className="mt-2.5 text-xs sm:text-[13px] text-white/70 leading-relaxed">
-                    Personajes, escenarios, props, UI, iconos, símbolos y piezas promocionales para proyectos indie y estudios.
-                  </p>
-                </div>
-              </div>
-
-              {/* Card 3: 6+ Áreas de producción visual */}
-              <div className="group rounded-3xl border border-white/10 bg-[#1b151f]/90 p-6 sm:p-7 shadow-xl backdrop-blur-md transition-all duration-300 hover:border-[#f59e0b]/40 hover:-translate-y-1 hover:bg-[#201824]">
-                {/* Icon box + hand-drawn accent lines */}
-                <div className="flex items-start justify-between">
-                  <div>
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#f59e0b]/40 bg-gradient-to-br from-[#78350f]/60 to-[#451a03]/90 text-[#fbbf24] shadow-lg shadow-[#f59e0b]/15">
-                      <Paintbrush className="h-7 w-7 text-[#fbbf24]" />
-                    </div>
-                    {/* Hand-drawn radial rays */}
-                    <div className="flex items-center gap-1.5 mt-2 pl-2 text-xs font-bold text-[#fbbf24]">
-                      <span>/</span>
-                      <span>|</span>
-                      <span>\</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-2">
-                  <span className="font-heading text-3xl sm:text-4xl font-extrabold text-white">
-                    6+
-                  </span>
-                  <h3 className="text-sm font-bold text-[#f59e0b] mt-0.5">
-                    Áreas de producción visual
-                  </h3>
-                  <p className="mt-2.5 text-xs sm:text-[13px] text-white/70 leading-relaxed">
-                    Concept art, personajes, entornos, props, UI, iconos, animación y materiales/texturas.
-                  </p>
-                </div>
-              </div>
-
-              {/* Card 4: 3 Game engines / Pipelines */}
-              <div className="group rounded-3xl border border-white/10 bg-[#0e1c1f]/90 p-6 sm:p-7 shadow-xl backdrop-blur-md transition-all duration-300 hover:border-[#10b981]/40 hover:-translate-y-1 hover:bg-[#122327]">
-                {/* Icon box + hand-drawn accent lines */}
-                <div className="flex items-start justify-between">
-                  <div>
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#10b981]/40 bg-gradient-to-br from-[#064e3b]/60 to-[#022c22]/90 text-[#34d399] shadow-lg shadow-[#10b981]/15">
-                      <Cog className="h-7 w-7 text-[#34d399]" />
-                    </div>
-                    {/* Hand-drawn radial rays */}
-                    <div className="flex items-center gap-1.5 mt-2 pl-2 text-xs font-bold text-[#34d399]">
-                      <span>/</span>
-                      <span>|</span>
-                      <span>\</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-2">
-                  <span className="font-heading text-3xl sm:text-4xl font-extrabold text-white">
-                    3
-                  </span>
-                  <h3 className="text-sm font-bold text-[#34d399] mt-0.5">
-                    Game engines / Pipelines
-                  </h3>
-                  <p className="mt-2.5 text-xs sm:text-[13px] text-white/70 leading-relaxed">
-                    Assets listos para producción en Unity, Godot y Unreal. Preparación, cortes, exportaciones y organización de archivos.
-                  </p>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-  );
+export const IMAGES = {
+  hero,
+  heroBackground: hero,
+  heroFullscreen: hero,
+  avatar,
+  aboutPortrait,
+  chibiCharacter,
+  heroCharacter: chibiCharacter,
+  uiGiftKit,
+  gameUi,
+  characters,
+  environment,
+  assets,
+  promo,
 };
+
+export const SERVICES: ServiceItem[] = [
+  {
+    id: 'game-ui',
+    title: 'Interfaz de Juego & Iconos (UI)',
+    tagline: 'HUDs táctiles, reactivos y menús de inventario intuitivos',
+    description: 'Interfaces nítidas y optimizadas para motor de juego (Unity, Godot), diseñadas para ofrecer claridad, respuesta táctil y estética inmersiva. Desde HUDs hasta sistemas de inventario complejos y microiconografía.',
+    iconName: 'LayoutGrid',
+    image: IMAGES.gameUi,
+    badge: 'Listo para Unity & Godot',
+    deliverables: ['Sprites 9-slice listos para escalar', 'Sets de iconos en alta resolución (@1x, @2x, @4x)', 'Kit de componentes UI en Figma', 'PSDs organizados por capas y SVG'],
+    software: ['Figma', 'Photoshop', 'Aseprite'],
+    turnaround: '1–2 semanas por hito de UI',
+  },
+  {
+    id: 'characters',
+    title: 'Personajes & Ilustración',
+    tagline: 'Siluetas memorables con personalidad única y encanto',
+    description: 'Model sheets completos de 360°, expresiones faciales de diálogo, alineaciones de PNJs y splash art de protagonistas adaptados minuciosamente al universo y lore de tu videojuego.',
+    iconName: 'Sparkles',
+    image: IMAGES.characters,
+    badge: 'Rigs preparados para Spine',
+    deliverables: ['Hojas ortográficas de turnaround', 'Sets de retratos con emociones y diálogos', 'Extremidades separadas para animación esquelética', 'Variantes de paleta de color'],
+    software: ['Photoshop', 'Procreate', 'Spine 2D'],
+    turnaround: '3–5 días por personaje',
+  },
+  {
+    id: 'game-assets',
+    title: 'Objetos & Sprites de Juego',
+    tagline: 'Props modulares, tiles isométricos e items coleccionables',
+    description: 'Iconos de objetos cohesivos, pociones alquímicas, mejoras modulares de armas, cofres de botín y elementos destructibles diseñados sobre cuadrículas pixel-perfect o vectores limpios.',
+    iconName: 'Package',
+    image: IMAGES.assets,
+    badge: 'Atlas de Texturas Optimizado',
+    deliverables: ['Sprite sheets con metadatos JSON', 'Cuadrículas estándar 64x64 / 128x128 / 256x256', 'Mapas de normales y máscaras emisivas', 'Sets de texturas repetibles (tilesets)'],
+    software: ['Aseprite', 'Photoshop', 'TexturePacker'],
+    turnaround: '2–4 días por pack de objetos',
+  },
+  {
+    id: 'environments',
+    title: 'Fondos & Escenarios',
+    tagline: 'Vistas evocadoras con múltiples capas de paralaje',
+    description: 'Capas de fondo en paralaje multidimensional, tilesets para plataformas, arenas de combate isométricas y escenarios acogedores de interior que generan inmersión sin distraer de la jugabilidad.',
+    iconName: 'Mountain',
+    image: IMAGES.environment,
+    badge: 'Paralaje Multi-capa',
+    deliverables: ['Capas horizontales continuas (seamless loop)', 'Pases de iluminación (Día / Atardecer / Noche)', 'Elementos de primer plano separados por profundidad', 'Fondos matte painting en 4K'],
+    software: ['Photoshop', 'Blender (Blockout)', 'Procreate'],
+    turnaround: '1–2 semanas por bioma',
+  },
+  {
+    id: '2d-animation',
+    title: 'Animación 2D & Efectos VFX',
+    tagline: 'Movimiento secundario fluido, bucles de idle y ráfagas VFX',
+    description: 'Animaciones expresivas cuadro a cuadro o cut-out esquelético. Bucles de respiración, ciclos de carrera, rebotes de botones de UI, chispas de partículas y efectos de subida de nivel.',
+    iconName: 'Film',
+    image: IMAGES.hero,
+    badge: 'Movimiento Suave a 60 FPS',
+    deliverables: ['Esqueleto y exportación JSON en Spine 2D', 'Secuencia PNG y atlas de sprites', 'Vistas previas en GIF y MP4 en bucle', 'Guía de integración para Unity Animator'],
+    software: ['Spine 2D', 'After Effects', 'Aseprite'],
+    turnaround: '3–7 días por bucle de rig',
+  },
+  {
+    id: 'promo-art',
+    title: 'Logotipos & Arte Promocional',
+    tagline: 'Cápsulas de Steam atractivas, key art y banners para festivales',
+    description: 'Arte para cápsulas de Steam orientado a máxima tasa de clics (Header principal, Small, Library Hero), logotipos vectoriales de títulos, banners de Kickstarter e ilustraciones para kit de prensa que capturan jugadores.',
+    iconName: 'Megaphone',
+    image: IMAGES.promo,
+    badge: 'Optimizado para Tienda Steam',
+    deliverables: ['Paquete completo con dimensiones oficiales de Steam', 'PSD multicapa con texto separado', 'Banners verticales y horizontales para redes sociales', 'Manual de marca y marcas tipográficas vectoriales'],
+    software: ['Photoshop', 'Illustrator', 'Figma'],
+    turnaround: '1 semana por suite de cápsulas',
+  },
+];
+
+export const PORTFOLIO_ITEMS: PortfolioItem[] = [
+  {
+    id: 'arcana-forge-ui',
+    title: 'Arcana Forge — UI de Forja e Inventario',
+    category: 'ui',
+    categoryLabel: 'UI de Juego & HUD',
+    gameGenre: 'RPG de fantasía · UI de juego · Gilded Spire Studios',
+    image: IMAGES.gameUi,
+    description: 'Diseñé la interfaz de forja e inventario para un RPG de fantasía, creando una experiencia clara y funcional que mantiene la estética del mundo del juego.',
+    year: '2025',
+    client: 'Gilded Spire Studios',
+    tags: ['UI de Juego', 'HUD', 'Inventario'],
+    whatIDeveloped: [
+      'Diseño visual del HUD e inventario',
+      'Marcos, botones e iconos',
+      'Estados visuales para interacción',
+      'Organización de elementos y jerarquía de información',
+      'Preparación de los assets para implementación',
+    ],
+    specs: {
+      resolution: '3840 × 2160 · 4K',
+      formats: ['PSD', 'PNG', 'SVG', '9-Slice', 'Unity UI'],
+      tools: ['Photoshop'],
+    },
+    productionReady: [
+      'Assets organizados y nombrados',
+      'Elementos modulares y reutilizables',
+      'Estados preparados para interacción',
+      'Archivos listos para implementación',
+    ],
+    colorPalette: ['#1c1724', '#f6c177', '#ff8a7a', '#3e8fb0', '#ebbcba'],
+    deliverables: ['HUD completo', 'Iconos', 'Botones', 'Marcos', 'Assets UI', 'PSD organizado'],
+  },
+  {
+    id: 'chronicles-characters',
+    title: 'Aetheria — Alineación de Personajes & Turnaround',
+    category: 'characters',
+    categoryLabel: 'Personajes & Ilustración',
+    gameGenre: 'RPG de aventuras · Diseño de personajes · Moonlit Games',
+    image: IMAGES.characters,
+    description: 'Diseñé los personajes principales con siluetas diferenciadas y expresiones de diálogo, preparando sus piezas para animación 2D.',
+    year: '2025',
+    client: 'Moonlit Games',
+    tags: ['Personajes', 'Turnaround', 'Spine 2D'],
+    whatIDeveloped: [
+      'Diseño conceptual y hojas de modelo (turnaround 360°)',
+      'Retratos y expresiones para cajas de diálogo',
+      'Separación de extremidades para animación esquelética',
+      'Variantes de paleta de color y accesorios',
+      'Preparación de los assets para rigging',
+    ],
+    specs: {
+      resolution: '4096 × 3072 · Alta definición',
+      formats: ['PSD por capas', 'Spine JSON', 'PNG transparente'],
+      tools: ['Photoshop', 'Procreate', 'Spine 2D'],
+    },
+    productionReady: [
+      'Capas limpias y ordenadas por jerarquía',
+      'Puntos de pivote y articulaciones preparados',
+      'Expresiones coherentes con la misma escala',
+      'Archivos listos para implementación',
+    ],
+    colorPalette: ['#281e35', '#eb6f92', '#f6c177', '#9ccfd8', '#faf5ed'],
+    deliverables: ['Hojas de modelo (turnaround)', 'Retratos de diálogo', 'Piezas para Spine', 'Guía de color', 'PSD organizado'],
+  },
+  {
+    id: 'mystic-relics-assets',
+    title: 'Mystic Relics — Iconos de Objetos & Alquimia',
+    category: 'assets',
+    categoryLabel: 'Objetos & Sprites de Juego',
+    gameGenre: 'Roguelike / Alquimia · Items y coleccionables · Dicebox Realm',
+    image: IMAGES.assets,
+    description: 'Diseñé un set de 32 reliquias, pociones y gemas mágicas con iluminación coherente y diferenciación visual inmediata por nivel de rareza.',
+    year: '2025',
+    client: 'Dicebox Realm',
+    tags: ['Items', 'Pociones', 'Atlas de texturas'],
+    whatIDeveloped: [
+      'Diseño visual de 32 iconos de objetos únicos',
+      'Código de colores y marcos por niveles de rareza',
+      'Iluminación unificada en ángulo de 45°',
+      'Empaquetado en atlas de texturas para motor',
+      'Bordes limpios optimizados para fondos claros y oscuros',
+    ],
+    specs: {
+      resolution: '256 × 256 por item · Atlas 2048 × 2048',
+      formats: ['Atlas PNG', 'JSON', 'PSD por capas', 'SVG'],
+      tools: ['Aseprite', 'Photoshop', 'TexturePacker'],
+    },
+    productionReady: [
+      'Assets organizados y nombrados',
+      'Cuadrículas estándar y espaciado consistente',
+      'Bordes alfa sin halos indeseados',
+      'Archivos listos para implementación',
+    ],
+    colorPalette: ['#161320', '#ff8a7a', '#9ccfd8', '#f6c177', '#c4a7e7'],
+    deliverables: ['32 Iconos individuales', 'Atlas de texturas empaquetado', 'Archivo JSON de metadatos', 'Marcos de rareza', 'PSD organizado'],
+  },
+  {
+    id: 'twilight-haven-environment',
+    title: 'Twilight Haven — Bosque Bioluminiscente',
+    category: 'environments',
+    categoryLabel: 'Fondos & Escenarios',
+    gameGenre: 'Metroidvania / Plataformas · Fondos 2D · Neon Moth Interactive',
+    image: IMAGES.environment,
+    description: 'Desarrollé el escenario en capas de paralaje continuo para un nivel nocturno, creando profundidad visual que no distrae de la acción.',
+    year: '2024',
+    client: 'Neon Moth Interactive',
+    tags: ['Paralaje', 'Escenarios', 'Tileset'],
+    whatIDeveloped: [
+      '5 capas de fondo en paralaje continuo (seamless loop)',
+      'Pases de iluminación ambiental y gradientes de color',
+      'Elementos de primer plano separados por profundidad',
+      'Tiles modulares de suelo y plataformas',
+      'Pruebas de contraste con sprites de personajes',
+    ],
+    specs: {
+      resolution: '5760 × 1080 · Panorámico 3 tiles',
+      formats: ['PSD multicapa', 'PNGs transparentes', 'Godot TileMap'],
+      tools: ['Photoshop', 'Blender Blockout', 'Godot Engine'],
+    },
+    productionReady: [
+      'Capas continuas con bucle horizontal invisible',
+      'Contraste calibrado para mantener legible la acción',
+      'Pases de iluminación en capas independientes',
+      'Archivos listos para implementación',
+    ],
+    colorPalette: ['#0f0d19', '#1f2d3d', '#31748f', '#c4a7e7', '#f6c177'],
+    deliverables: ['5 Capas de paralaje', 'Tileset de plataformas', 'LUT de color ambiental', 'Guía de velocidades de cámara', 'PSD organizado'],
+  },
+  {
+    id: 'pixel-odyssey-animation',
+    title: 'Pixel Odyssey — Animación 2D & Efectos VFX',
+    category: 'animation',
+    categoryLabel: 'Animación 2D & Efectos VFX',
+    gameGenre: 'Acción / Plataformas 2D · Animación · Indie Forge',
+    image: IMAGES.hero,
+    description: 'Animé ciclos de movimiento, ataques y efectos de partículas para personajes y menús de interfaz con fluidez a 60 FPS.',
+    year: '2025',
+    client: 'Indie Forge',
+    tags: ['Animación', 'Spine 2D', 'VFX'],
+    whatIDeveloped: [
+      'Ciclos de reposo (idle), carrera y salto',
+      'Efectos visuales de impacto, chispas y brillo',
+      'Animaciones reactivas para botones y elementos UI',
+      'Rigs limpios y mallas deformables en Spine 2D',
+      'Optimización de fotogramas para rendimiento fluido',
+    ],
+    specs: {
+      resolution: 'Full HD · 60 FPS',
+      formats: ['Spine JSON', 'Secuencia PNG', 'Spritesheet', 'GIF'],
+      tools: ['Spine 2D', 'After Effects', 'Photoshop'],
+    },
+    productionReady: [
+      'Assets organizados y nombrados',
+      'Rigs optimizados para bajo consumo de memoria',
+      'Eventos de impacto marcados en timeline',
+      'Archivos listos para implementación',
+    ],
+    colorPalette: ['#171322', '#ff8a7a', '#f6c177', '#38bdf8', '#faf6f0'],
+    deliverables: ['Esqueleto y JSON de Spine', 'Spritesheets empaquetados', 'Vistas previas en MP4 y GIF', 'Atlas de texturas', 'PSD organizado'],
+  },
+  {
+    id: 'skyship-voyager-promo',
+    title: 'Skyship Voyager — Cápsula de Steam & Key Art',
+    category: 'promo',
+    categoryLabel: 'Logotipos & Arte Promocional',
+    gameGenre: 'RPG de Aventuras · Marketing · Stratus Forge Studios',
+    image: IMAGES.promo,
+    description: 'Diseñé la ilustración de portada principal y el paquete completo de cápsulas de Steam con el logotipo oficial, optimizado para destacar en la tienda.',
+    year: '2025',
+    client: 'Stratus Forge Studios',
+    tags: ['Cápsula Steam', 'Key Art', 'Logotipo'],
+    whatIDeveloped: [
+      'Ilustración principal (Key Art) en alta resolución',
+      'Diseño tipográfico de logotipo vectorial',
+      'Adaptación a todas las dimensiones de cápsulas de Steam',
+      'Pruebas de legibilidad en miniatura (120px)',
+      'Banners y cabeceras para redes sociales y kit de prensa',
+    ],
+    specs: {
+      resolution: '460 × 215 · 616 × 353 · 920 × 430 · 1920 × 1080',
+      formats: ['PSD con texto editable', 'PNG', 'WebP', 'SVG vectorial'],
+      tools: ['Photoshop', 'Illustrator', 'Figma'],
+    },
+    productionReady: [
+      '100% conforme a las especificaciones oficiales de Valve',
+      'Fondo e ilustración con logotipo en capas separadas',
+      'Contraste optimizado para fondo oscuro de Steam',
+      'Archivos listos para implementación',
+    ],
+    colorPalette: ['#181424', '#ff8a7a', '#f6c177', '#56949f', '#faf5ed'],
+    deliverables: ['Header Capsule', 'Small Capsule', 'Main Capsule', 'Library Hero & Logo', 'Kit para redes sociales', 'PSD organizado'],
+  },
+];
+
+export const PIPELINE_STEPS: PipelineStep[] = [
+  {
+    step: 1,
+    tag: '01 · Me cuentas',
+    title: 'Brief & necesidades',
+    description: 'Me compartes qué necesitas resolver, junto con referencias, estilo visual o cualquier información importante de tu juego.',
+    icon: 'MessageSquareText',
+    youGive: 'Brief · referencias · estilo · necesidades',
+    iDo: 'Defino el alcance y las entregas.',
+  },
+  {
+    step: 2,
+    tag: '02 · Definimos',
+    title: 'Alcance & dirección',
+    description: 'Acordamos qué voy a producir, la dirección visual, las prioridades y lo que necesitas recibir al final.',
+    icon: 'FolderKanban',
+    definedItems: 'Alcance · entregables · fechas · precio',
+  },
+  {
+    step: 3,
+    tag: '03 · Creo',
+    title: 'Arte & feedback',
+    description: 'Desarrollo los assets y comparto avances para que podamos ajustar lo necesario antes de llegar al resultado final.',
+    icon: 'Palette',
+    processFlow: ['Bocetos', 'revisión', 'producción', 'arte final'],
+  },
+  {
+    step: 4,
+    tag: '04 · Entrego',
+    title: 'Assets listos para producción',
+    description: 'Recibes los archivos organizados y preparados para que puedas utilizarlos directamente en tu proyecto.',
+    icon: 'CheckCircle2',
+    deliverablesList: 'PSD · PNG · Sprites · Rigs · Exports · Archivos para engine',
+  },
+];
+
+export const BENEFITS: Benefit[] = [
+  {
+    title: 'Colaboración Flexible',
+    description: 'Resérvame para un sprint de dos semanas, un hito concreto o soporte fraccional mensual. Escala o pausa según el presupuesto de tu estudio.',
+    icon: 'Zap',
+    highlight: 'Sin ataduras ni contratos rígidos',
+  },
+  {
+    title: 'Diseñado para Equipos Indie',
+    description: 'Entiendo la dinámica de equipos pequeños y los límites de presupuesto bootstrap. Obtienes calidad de estudio adaptada a la realidad indie.',
+    icon: 'HeartHandshake',
+    highlight: 'Creado para los ritmos del desarrollo indie',
+  },
+  {
+    title: 'Sin Compromiso de Tiempo Completo',
+    description: 'Potencia de arte 2D senior sin cargas sociales, equipos informáticos a tu cargo ni nómina fija. Pagas únicamente por el arte producido.',
+    icon: 'ShieldCheck',
+    highlight: 'Cero sobrecostos de contratación fija',
+  },
+  {
+    title: 'Comunicación Transparente',
+    description: 'Avances diarios directos por Discord o Slack, solapamiento de horarios, plazos claros y respuestas rápidas. Cero incertidumbre.',
+    icon: 'MessageSquareText',
+    highlight: 'WIPs diarios y sincronización por Discord',
+  },
+  {
+    title: 'Archivos Listos para Producción',
+    description: 'Todos los recursos se entregan cortados, ordenados, con perfiles de color ajustados y configurados para tu motor (Unity, Godot o Unreal).',
+    icon: 'FolderKanban',
+    highlight: 'Capas limpias y testeado en motor',
+  },
+  {
+    title: 'Adaptabilidad a Cualquier Dirección de Arte',
+    description: 'Desde pixel art acogedor y acuarela hasta interfaces vectoriales modernas o sombreado cel shading de fantasía oscura: me mimetizo con tu estilo.',
+    icon: 'Sparkles',
+    highlight: 'Mimetización con la identidad de tu juego',
+  },
+];
+
+export const TESTIMONIALS: TestimonialItem[] = [
+  {
+    id: 'elena-rostova',
+    quote: "Having Desi as our visual assistant felt like having a senior art director right in our Discord. Organized files, zero drama, and her turnarounds for our Spine animations were completely flawless.",
+    quoteEs: "Tener a Desi como asistente visual fue como tener una directora de arte senior directamente en nuestro Discord. Archivos impecables, cero drama y sus entregas para animaciones en Spine fueron perfectas.",
+    author: "Elena Rostova",
+    role: "Studio Founder & Producer",
+    studio: "Gilded Spire Studios",
+    game: "Arcana Forge RPG",
+    gameBadge: "Steam Demo 2025",
+    avatarSeed: "elena",
+    rating: 5,
+  },
+  {
+    id: 'kaelen-vance',
+    quote: "DesiPatty jumped into our Godot project 3 weeks before our demo deadline. Her UI kit and character portraits completely elevated our game from looking like a prototype to a polished Steam showcase.",
+    quoteEs: "DesiPatty se sumó a nuestro proyecto en Godot 3 semanas antes del deadline. Su kit de UI y retratos elevaron el juego de un prototipo básico a un showcase digno de Steam.",
+    author: "Kaelen Vance",
+    role: "Lead Developer",
+    studio: "Moonlit Clockwork Games",
+    game: "Aetheria: Chrono Quest",
+    gameBadge: "Kickstarter Funded 180%",
+    avatarSeed: "kaelen",
+    rating: 5,
+  },
+  {
+    id: 'marcus-thorne',
+    quote: "As a solo dev, art was my ultimate bottleneck. Desi delivered 32 item icons with pixel-perfect normal maps and consistent top-down lighting. Saved me at least two months of painful trial-and-error.",
+    quoteEs: "Como desarrollador en solitario, el arte era mi gran cuello de botella. Desi entregó 32 iconos de objetos con mapas de normales y una iluminación coherente. Me ahorró dos meses de trabajo.",
+    author: "Marcus Thorne",
+    role: "Solo Indie Creator",
+    studio: "Dicebox Realm",
+    game: "Mystic Relics Deckbuilder",
+    gameBadge: "Steam Early Access",
+    avatarSeed: "marcus",
+    rating: 5,
+  },
+  {
+    id: 'saffron-lin',
+    quote: "She adapted to our established watercolor art bible on day one. Our players constantly praise the bioluminescent parallax backgrounds she crafted. Highly recommended for any serious indie studio.",
+    quoteEs: "Se adaptó a nuestra guía de arte estilo acuarela desde el primer día. Los jugadores elogian constantemente los fondos con paralaje bioluminiscente que diseñó.",
+    author: "Saffron Lin",
+    role: "Creative Director",
+    studio: "Neon Moth Interactive",
+    game: "Twilight Haven",
+    gameBadge: "Indie Megabooth Selection",
+    avatarSeed: "saffron",
+    rating: 5,
+  },
+];
+
+export const FAQ_ITEMS: FaqItem[] = [
+  {
+    id: 'how-flexible-works',
+    question: "¿En qué se diferencia trabajar con una Asistente Creativa frente a una contratación a tiempo completo o agencia?",
+    questionEs: "¿En qué se diferencia trabajar con una Asistente Creativa frente a una contratación a tiempo completo o agencia?",
+    answer: "Sin largos procesos de RRHH, sin costos de nómina ni comisiones infladas de agencia. Me contratas para tareas específicas, un sprint por hito (ej. 2-3 semanas) o soporte fraccional. Me integro directamente a tu Discord o Slack como una compañera más de tu equipo.",
+    answerEs: "Sin largos procesos de RRHH, sin costos de nómina ni comisiones infladas de agencia. Me contratas para tareas específicas, un sprint por hito (ej. 2-3 semanas) o soporte fraccional. Me integro directamente a tu Discord o Slack como una compañera más de tu equipo.",
+    tag: "Colaboración & Integración",
+  },
+  {
+    id: 'engine-ready-formats',
+    question: "¿En qué formatos entregas los archivos para Unity, Godot o Unreal Engine?",
+    questionEs: "¿En qué formatos entregas los archivos para Unity, Godot o Unreal Engine?",
+    answer: "Todo se entrega listo para producción: PNGs 9-slice con metadatos para UI, rigs esqueléticos de Spine 2D con exportaciones JSON y atlas, PSDs por capas ordenadas y nombradas, hojas de sprites estandarizadas y mapas normales/emisivos.",
+    answerEs: "Todo se entrega listo para producción: PNGs 9-slice con metadatos para UI, rigs esqueléticos de Spine 2D con exportaciones JSON y atlas, PSDs por capas ordenadas y nombradas, hojas de sprites estandarizadas y mapas normales/emisivos.",
+    tag: "Formatos de Entrega Técnica",
+  },
+  {
+    id: 'communication-flow',
+    question: "¿Cómo nos comunicamos y damos seguimiento a las tareas durante el sprint?",
+    questionEs: "¿Cómo nos comunicamos y damos seguimiento a las tareas durante el sprint?",
+    answer: "Nos adaptamos a las herramientas de tu estudio: Discord, Slack, Trello, Notion o GitHub. Envío actualizaciones diarias de avances (WIPs), GIFs comparativos y resuelvo dudas directamente en tu canal.",
+    answerEs: "Nos adaptamos a las herramientas de tu estudio: Discord, Slack, Trello, Notion o GitHub. Envío actualizaciones diarias de avances (WIPs), GIFs comparativos y resuelvo dudas directamente en tu canal.",
+    tag: "Flujo & Sincronización",
+  },
+  {
+    id: 'established-art-style',
+    question: "¿Qué ocurre si nuestro juego ya tiene una dirección de arte o estilo visual definido?",
+    questionEs: "¿Qué ocurre si nuestro juego ya tiene una dirección de arte o estilo visual definido?",
+    answer: "Es una de mis mayores fortalezas. Actúo como un camaleón visual: analizo tus sprites actuales, grosores de línea, paletas de color y shaders para que los nuevos elementos se integren sin ninguna diferencia.",
+    answerEs: "Es una de mis mayores fortalezas. Actúo como un camaleón visual: analizo tus sprites actuales, grosores de línea, paletas de color y shaders para que los nuevos elementos se integren sin ninguna diferencia.",
+    tag: "Dirección de Arte & Estilo",
+  },
+  {
+    id: 'milestone-pricing',
+    question: "¿Cómo funcionan las cotizaciones, hitos y pagos?",
+    questionEs: "¿Cómo funcionan las cotizaciones, hitos y pagos?",
+    answer: "Definimos un alcance claro y un precio cerrado por hito (generalmente 50% de anticipo y 50% al entregar los archivos finales organizados), o bloques de sprint semanales. Sin costos ocultos y con revisiones estándar incluidas.",
+    answerEs: "Definimos un alcance claro y un precio cerrado por hito (generalmente 50% de anticipo y 50% al entregar los archivos finales organizados), o bloques de sprint semanales. Sin costos ocultos y con revisiones estándar incluidas.",
+    tag: "Presupuestos & Hitos",
+  },
+  {
+    id: 'steam-promo-marketing',
+    question: "¿Puedes diseñar el arte de cápsulas de Steam y marketing para Next Fest o Kickstarter?",
+    questionEs: "¿Puedes diseñar el arte de cápsulas de Steam y marketing para Next Fest o Kickstarter?",
+    answer: "¡Por supuesto! Creo paquetes completos de cápsulas de Steam (Header principal, Small capsule, Library Hero y Logo con capa alfa) optimizados para alto ratio de clics y cumpliendo con las políticas de Valve, además de GIFs para la descripción.",
+    answerEs: "¡Por supuesto! Creo paquetes completos de cápsulas de Steam (Header principal, Small capsule, Library Hero y Logo con capa alfa) optimizados para alto ratio de clics y cumpliendo con las políticas de Valve, además de GIFs para la descripción.",
+    tag: "Marketing & Tienda Steam",
+  },
+];
