@@ -1,20 +1,32 @@
 import { PortfolioItem, ServiceItem, PipelineStep, Benefit, TestimonialItem, FaqItem } from '../types';
 
-// Asset paths
+// Asset imports for production bundler & relative path resolution
+import heroAnimeLandscape from '../assets/images/hero_anime_landscape_1790377945392.jpg';
+import artistAvatar from '../assets/images/artist_avatar_1789270469437.jpg';
+import desipattyPhoto from '../assets/images/desipatty_photo.png';
+import desiHeroCharacter from '../assets/images/desi_hero_character_1790376498667.png';
+import uiStarterKitPreview from '../assets/images/ui_starter_kit_preview_1790349042555.jpg';
+import portfolioGameUi from '../assets/images/portfolio_game_ui_1789270481710.jpg';
+import portfolioCharacters from '../assets/images/portfolio_characters_1789270492091.jpg';
+import portfolioEnvironment from '../assets/images/portfolio_environment_1789270501242.jpg';
+import portfolioGameAssets from '../assets/images/portfolio_game_assets_1789270515035.jpg';
+import portfolioPromoArt from '../assets/images/portfolio_promo_art_1789270525607.jpg';
+
+// Asset paths mapped to bundled assets
 export const IMAGES = {
-  hero: '/src/assets/images/hero_anime_landscape_1790377945392.jpg',
-  heroBackground: '/src/assets/images/hero_anime_landscape_1790377945392.jpg',
-  heroFullscreen: '/src/assets/images/hero_anime_landscape_1790377945392.jpg',
-  avatar: '/src/assets/images/artist_avatar_1789270469437.jpg',
-  aboutPortrait: '/src/assets/images/desipatty_photo.png',
-  chibiCharacter: '/src/assets/images/desi_hero_character_1790376498667.png',
-  heroCharacter: '/src/assets/images/desi_hero_character_1790376498667.png',
-  uiGiftKit: '/src/assets/images/ui_starter_kit_preview_1790349042555.jpg',
-  gameUi: '/src/assets/images/portfolio_game_ui_1789270481710.jpg',
-  characters: '/src/assets/images/portfolio_characters_1789270492091.jpg',
-  environment: '/src/assets/images/portfolio_environment_1789270501242.jpg',
-  assets: '/src/assets/images/portfolio_game_assets_1789270515035.jpg',
-  promo: '/src/assets/images/portfolio_promo_art_1789270525607.jpg',
+  hero: heroAnimeLandscape,
+  heroBackground: heroAnimeLandscape,
+  heroFullscreen: heroAnimeLandscape,
+  avatar: artistAvatar,
+  aboutPortrait: desipattyPhoto,
+  chibiCharacter: desiHeroCharacter,
+  heroCharacter: desiHeroCharacter,
+  uiGiftKit: uiStarterKitPreview,
+  gameUi: portfolioGameUi,
+  characters: portfolioCharacters,
+  environment: portfolioEnvironment,
+  assets: portfolioGameAssets,
+  promo: portfolioPromoArt,
 };
 
 export const SERVICES: ServiceItem[] = [
