@@ -1,0 +1,6 @@
+{
+  "name": "DesiPatty — 2D Game Artist & Visual Assistant",
+  "description": "High-end visual portfolio and website mockup for DesiPatty, Creative Visual Assistant for Indie Game Studios.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
