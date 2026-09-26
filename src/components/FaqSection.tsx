@@ -3,17 +3,15 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   HelpCircle, 
   ChevronDown, 
-  MessageSquare, 
-  Sparkles, 
-  FileCode2, 
-  ArrowRight,
   Search
 } from 'lucide-react';
 import { FAQ_ITEMS } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export const FaqSection: React.FC = () => {
   const [openId, setOpenId] = useState<string | null>(FAQ_ITEMS[0].id);
   const [searchQuery, setSearchQuery] = useState('');
+  const { language, t } = useLanguage();
 
   const toggleFaq = (id: string) => {
     setOpenId(openId === id ? null : id);
@@ -22,88 +20,88 @@ export const FaqSection: React.FC = () => {
   const filteredFaqs = FAQ_ITEMS.filter((item) => {
     if (!searchQuery.trim()) return true;
     const q = searchQuery.toLowerCase();
+    const qText = language === 'en' ? item.question : (item.questionEs || item.question);
+    const aText = language === 'en' ? item.answer : (item.answerEs || item.answer);
     return (
-      item.question.toLowerCase().includes(q) ||
-      (item.questionEs && item.questionEs.toLowerCase().includes(q)) ||
-      item.answer.toLowerCase().includes(q) ||
-      (item.answerEs && item.answerEs.toLowerCase().includes(q)) ||
+      qText.toLowerCase().includes(q) ||
+      aText.toLowerCase().includes(q) ||
       item.tag.toLowerCase().includes(q)
     );
   });
 
   return (
-    <section id="faq" className="relative py-20 lg:py-28 border-t border-white/5 bg-black text-[#faf6f0]">
+    <section id="faq" className="relative py-12 lg:py-16 border-t border-white/5 bg-black text-[#faf6f0]">
       {/* Background ambient lighting */}
-      <div className="pointer-events-none absolute top-1/3 right-1/4 h-96 w-96 rounded-full bg-[#ff8a7a]/5 blur-[160px]" />
+      <div className="pointer-events-none absolute top-1/3 right-1/4 h-80 w-80 rounded-full bg-[#ff8a7a]/5 blur-[150px]" />
 
-      <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
+        {/* Section Header (Compact) */}
         <div className="text-center max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#9ccfd8]/30 bg-[#9ccfd8]/10 px-4 py-1 text-xs font-semibold text-[#9ccfd8]">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#9ccfd8]/30 bg-[#9ccfd8]/10 px-3.5 py-0.5 text-xs font-semibold text-[#9ccfd8]">
             <HelpCircle className="h-3.5 w-3.5" />
-            <span>07 • Preguntas Frecuentes</span>
+            <span>{t('faq.badge')}</span>
           </div>
-          <h2 className="mt-4 font-heading text-3xl font-extrabold tracking-tight text-[#faf6f0] sm:text-4xl lg:text-5xl">
-            Preguntas y Respuestas Clave
+          <h2 className="mt-2.5 font-heading text-2xl sm:text-4xl font-extrabold tracking-tight text-[#faf6f0] leading-tight">
+            {t('faq.title')}
           </h2>
-          <p className="mt-4 text-base text-white/70 leading-relaxed">
-            Todo lo que necesitas saber sobre flujos de trabajo, formatos para motor, revisiones y presupuestos.
+          <p className="mt-2 text-xs sm:text-sm text-white/70 leading-relaxed">
+            {t('faq.subtitle')}
           </p>
         </div>
 
-        {/* Quick Search Filter */}
-        <div className="mt-10 relative max-w-md mx-auto">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
+        {/* Quick Search Filter (Compact: mt-6) */}
+        <div className="mt-6 relative max-w-md mx-auto">
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
           <input
             type="text"
-            placeholder="Buscar duda (ej: Unity, pagos, Discord, estilo)..."
+            placeholder={t('faq.searchPlaceholder')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-2xl border border-white/10 bg-[#171322] py-3 pl-11 pr-4 text-xs sm:text-sm text-white placeholder-white/40 shadow-inner focus:border-[#ff8a7a] focus:outline-none focus:ring-1 focus:ring-[#ff8a7a]"
+            className="w-full rounded-xl border border-white/10 bg-[#171322] py-2.5 pl-10 pr-3.5 text-xs sm:text-sm text-white placeholder-white/40 shadow-inner focus:border-[#ff8a7a] focus:outline-none focus:ring-1 focus:ring-[#ff8a7a]"
           />
         </div>
 
-        {/* Accordion List */}
-        <div className="mt-10 space-y-4">
+        {/* Accordion List (Compact padding: py-3 px-4.5) */}
+        <div className="mt-6 space-y-2.5">
           {filteredFaqs.map((faq) => {
             const isOpen = openId === faq.id;
+            const questionText = language === 'en' ? faq.question : (faq.questionEs || faq.question);
+            const answerText = language === 'en' ? faq.answer : (faq.answerEs || faq.answer);
 
             return (
               <motion.div
                 key={faq.id}
                 layout
-                className={`overflow-hidden rounded-3xl border transition-all duration-300 ${
+                className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
                   isOpen
-                    ? 'border-[#ff8a7a]/50 bg-[#181324] shadow-xl shadow-[#ff8a7a]/5'
+                    ? 'border-[#ff8a7a]/50 bg-[#181324] shadow-lg shadow-[#ff8a7a]/5'
                     : 'border-white/10 bg-[#14101e] hover:border-white/20 hover:bg-[#161222]'
                 }`}
               >
-                {/* Header Question */}
+                {/* Header Question (Tighter vertical space) */}
                 <button
                   onClick={() => toggleFaq(faq.id)}
-                  className="flex w-full items-center justify-between p-6 text-left"
+                  className="flex w-full items-center justify-between py-3.5 px-4 sm:px-5 text-left"
                 >
-                  <div className="flex items-center gap-3.5 pr-4">
-                    <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 font-mono text-xs font-bold text-[#ff8a7a]">
+                  <div className="flex items-center gap-3 pr-3">
+                    <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 font-mono text-[11px] font-bold text-[#ff8a7a]">
                       ?
                     </span>
                     <div>
-                      <span className="font-heading text-base sm:text-lg font-bold text-white leading-snug">
-                        {faq.questionEs || faq.question}
+                      <span className="font-heading text-sm sm:text-base font-bold text-white leading-snug">
+                        {questionText}
                       </span>
-                      <div className="mt-1">
-                        <span className="rounded bg-white/5 px-2 py-0.5 font-mono text-[10px] text-[#f6c177]">
-                          {faq.tag}
-                        </span>
-                      </div>
+                      <span className="ml-2 inline-block rounded bg-white/5 px-1.5 py-0.2 font-mono text-[9px] text-[#f6c177]">
+                        {faq.tag}
+                      </span>
                     </div>
                   </div>
 
-                  <div className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition-transform duration-300 ${
+                  <div className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition-transform duration-300 ${
                     isOpen ? 'rotate-180 bg-[#ff8a7a] text-[#13111a]' : ''
                   }`}>
-                    <ChevronDown className="h-4 w-4" />
+                    <ChevronDown className="h-3.5 w-3.5" />
                   </div>
                 </button>
 
@@ -114,10 +112,10 @@ export const FaqSection: React.FC = () => {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25 }}
+                      transition={{ duration: 0.2 }}
                     >
-                      <div className="border-t border-white/10 px-6 pb-6 pt-4 text-xs sm:text-sm text-white/80 leading-relaxed">
-                        <p>{faq.answerEs || faq.answer}</p>
+                      <div className="border-t border-white/10 px-4 sm:px-5 pb-4 pt-3 text-xs sm:text-sm text-white/80 leading-relaxed">
+                        <p>{answerText}</p>
                       </div>
                     </motion.div>
                   )}
@@ -125,20 +123,6 @@ export const FaqSection: React.FC = () => {
               </motion.div>
             );
           })}
-        </div>
-
-        {/* Still have questions note */}
-        <div className="mt-12 rounded-3xl border border-dashed border-white/15 bg-[#14101e]/80 p-6 text-center">
-          <p className="text-sm font-medium text-white/80">
-            ¿Tienes alguna pregunta específica sobre el motor o pipeline de tu proyecto?
-          </p>
-          <a
-            href="#contact"
-            className="mt-3 inline-flex items-center gap-2 text-xs font-bold text-[#ff8a7a] hover:underline"
-          >
-            <span>Escríbeme directamente en la sección de contacto</span>
-            <ArrowRight className="h-3.5 w-3.5" />
-          </a>
         </div>
 
       </div>

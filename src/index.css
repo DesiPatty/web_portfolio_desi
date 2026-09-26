@@ -2,21 +2,22 @@
 
 @layer base {
   :root {
-    --font-outfit: 'Outfit', sans-serif;
-    --font-jakarta: 'Plus Jakarta Sans', sans-serif;
+    --font-heading: 'Fredoka', 'Outfit', sans-serif;
+    --font-body: 'Nunito', 'Plus Jakarta Sans', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
     --font-hand: 'Caveat', cursive;
   }
   
   body {
-    font-family: var(--font-jakarta);
+    font-family: var(--font-body);
     background-color: #13111a;
     color: #faf6f0;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, .font-heading {
-    font-family: var(--font-outfit);
+    font-family: var(--font-heading);
+    letter-spacing: -0.01em;
   }
 
   .font-handwriting {

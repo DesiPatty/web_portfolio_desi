@@ -16,8 +16,9 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { MockupViewportWrapper } from './components/MockupViewportWrapper';
 import { ServiceItem } from './types';
+import { LanguageProvider } from './context/LanguageContext';
 
-export default function App() {
+function PortfolioApp() {
   const [viewMode, setViewMode] = useState<'interactive' | 'mockup169'>('interactive');
   const [selectedServiceForContact, setSelectedServiceForContact] = useState<string>('Interfaz de Juego & Iconos (UI)');
 
@@ -44,9 +45,9 @@ export default function App() {
           onOpenContact={() => scrollToSection('contact')}
         />
 
-        {/* 8 Requested Main Sections */}
+        {/* 8 Main Portfolio Sections with Compact Vertical Spacing */}
         <main className="flex-1">
-          {/* 1 - Home: Fullscreen image with title 'Your Creative Assistant for Indie Projects' */}
+          {/* 1 - Home / Hero */}
           <HeroSection
             onWorkTogetherClick={() => scrollToSection('contact')}
             onSeeWorkClick={() => scrollToSection('services')}
@@ -56,19 +57,19 @@ export default function App() {
           {/* 2 - Sobre Mí */}
           <AboutAssistant />
 
-          {/* 3 - Servicios (with rich artwork preview specs) */}
+          {/* 3 - Servicios */}
           <ServicesSection onSelectService={handleSelectService} />
 
-          {/* 4 - Procesos y Ventajas */}
+          {/* 4 - Procesos */}
           <ProcessAndAdvantages />
 
           {/* 5 - Testimonios */}
           <TestimonialsSection />
 
-          {/* 6 - Un Kit de Regalo de Interface */}
+          {/* 6 - Kit Gratis */}
           <GiftKitSection />
 
-          {/* 7 - Preguntas y Respuestas */}
+          {/* 7 - Preguntas Frecuentes */}
           <FaqSection />
 
           {/* 8 - Contacto */}
@@ -79,5 +80,13 @@ export default function App() {
         <Footer />
       </div>
     </MockupViewportWrapper>
+  );
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <PortfolioApp />
+    </LanguageProvider>
   );
 }
