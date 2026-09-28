@@ -126,7 +126,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <section 
       id="home" 
-      className="relative flex overflow-hidden bg-black text-[#faf6f0]"
+      className="relative flex min-h-[calc(100vh-4rem)] min-h-[calc(100dvh-4rem)] w-full items-center overflow-hidden bg-black text-[#faf6f0]"
     >
       {/* Background layer */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
@@ -151,7 +151,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         {/* Ambient atmospheric vignettes & contrast shaders */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-black/20" />
-        <div className="absolute -bottom-1 inset-x-0 h-14 bg-gradient-to-t from-black via-black/80 to-transparent" />
+        <div className="absolute -bottom-1 inset-x-0 h-24 bg-gradient-to-t from-black via-black/80 to-transparent" />
       </div>
 
       {/* Ambient lighting spots */}
@@ -162,7 +162,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       <div className="pointer-events-none absolute top-1/2 right-10 h-[400px] w-[400px] rounded-full bg-[#f6c177]/15 blur-[130px] z-1" />
 
       {/* Main Container */}
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-4 sm:px-6 lg:px-8 lg:pl-16 pt-8 sm:pt-10 lg:pt-12 pb-10 sm:pb-12 lg:pb-14">
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-4 sm:px-6 lg:px-8 lg:pl-16 py-6 sm:py-8 lg:py-10">
         <div className="grid w-full items-center gap-8 lg:grid-cols-12 lg:gap-10">
           
           {/* ========================================================================= */}
@@ -339,13 +339,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                         ease: 'easeInOut',
                       },
                     }}
-                    className="relative z-10 max-h-[300px] sm:max-h-[340px] lg:max-h-[370px] w-auto drop-shadow-[0_20px_35px_rgba(0,0,0,0.8)] filter"
+                    className="relative z-10 max-h-[360px] sm:max-h-[420px] lg:max-h-[470px] xl:max-h-[500px] w-auto drop-shadow-[0_20px_35px_rgba(0,0,0,0.8)] filter"
                   >
                     <img
                       src={IMAGES.heroCharacter}
                       alt="DesiPatty — Asistente de Arte 2D para Videojuegos"
                       referrerPolicy="no-referrer"
-                      className="h-full w-auto max-h-[300px] sm:max-h-[340px] lg:max-h-[370px] object-contain"
+                      className="h-full w-auto max-h-[360px] sm:max-h-[420px] lg:max-h-[470px] xl:max-h-[500px] object-contain"
                     />
                   </motion.div>
                 </motion.div>
@@ -377,12 +377,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                       ease: 'easeInOut',
                     }}
                     whileHover={{ scale: 1.02 }}
-                    className="relative z-10 max-w-[420px] lg:max-w-[480px] w-full"
+                    className="relative z-10 max-w-[460px] lg:max-w-[530px] xl:max-w-[580px] w-full"
                   >
                     <img
                       src={currentSlide.featuredArt}
                       alt={currentSlide.artAlt}
-                      className="w-full h-auto max-h-[280px] sm:max-h-[310px] lg:max-h-[340px] object-contain drop-shadow-[0_15px_35px_rgba(0,0,0,0.7)]"
+                      className="w-full h-auto max-h-[320px] sm:max-h-[380px] lg:max-h-[430px] xl:max-h-[460px] object-contain drop-shadow-[0_15px_35px_rgba(0,0,0,0.7)]"
                       style={{
                         maskImage: 'radial-gradient(ellipse 90% 82% at 50% 50%, black 55%, transparent 100%)',
                         WebkitMaskImage: 'radial-gradient(ellipse 90% 82% at 50% 50%, black 55%, transparent 100%)',
