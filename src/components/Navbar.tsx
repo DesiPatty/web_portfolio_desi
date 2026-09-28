@@ -66,17 +66,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
         {/* Right side actions: Language Switcher + CTA */}
         <div className="flex items-center gap-2.5 sm:gap-3">
           
-          {/* Language Switcher Button (ES / EN) */}
+          {/* Language Switcher Button (EN / ES) */}
           <button
             onClick={toggleLanguage}
             className="flex items-center gap-1.5 rounded-xl border border-white/15 bg-[#171322] px-2.5 py-1.5 font-heading text-xs font-bold text-white/80 hover:border-[#ff8a7a]/50 hover:text-white transition-all shadow-sm"
-            title={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
-            aria-label={language === 'es' ? 'Switch language to English' : 'Cambiar idioma a Español'}
+            title={language === 'en' ? 'Cambiar a Español' : 'Switch to English'}
+            aria-label={language === 'en' ? 'Cambiar idioma a Español' : 'Switch language to English'}
           >
             <Globe className="h-3.5 w-3.5 text-[#ff8a7a]" />
-            <span className={language === 'es' ? 'text-[#ff8a7a] font-bold' : 'text-white/40'}>ES</span>
-            <span className="text-white/20">/</span>
             <span className={language === 'en' ? 'text-[#ff8a7a] font-bold' : 'text-white/40'}>EN</span>
+            <span className="text-white/20">/</span>
+            <span className={language === 'es' ? 'text-[#ff8a7a] font-bold' : 'text-white/40'}>ES</span>
           </button>
 
           {/* Main CTA: Iniciar Proyecto / Start a Project */}
@@ -122,9 +122,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
               className="flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/5 px-3 py-1 font-heading text-xs font-bold text-white"
             >
               <Globe className="h-3.5 w-3.5 text-[#ff8a7a]" />
-              <span className={language === 'es' ? 'text-[#ff8a7a]' : 'text-white/50'}>ES</span>
-              <span className="text-white/20">/</span>
               <span className={language === 'en' ? 'text-[#ff8a7a]' : 'text-white/50'}>EN</span>
+              <span className="text-white/20">/</span>
+              <span className={language === 'es' ? 'text-[#ff8a7a]' : 'text-white/50'}>ES</span>
             </button>
           </div>
         </div>

@@ -402,8 +402,8 @@ export const TestimonialsSection: React.FC = () => {
               })}
             </div>
 
-            {/* Stepper Navigation: ← 01 / 04 → */}
-            <div className="flex items-center gap-2.5">
+            {/* Stepper Navigation: ← → (Only arrows, no numbers) */}
+            <div className="flex items-center gap-2">
               <button
                 onClick={handlePrev}
                 aria-label="Testimonio anterior"
@@ -411,12 +411,6 @@ export const TestimonialsSection: React.FC = () => {
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
-
-              <div className="flex items-center px-2 font-mono text-xs font-bold tracking-wider text-white">
-                <span className="text-[#ff7865]">{currentCase.indexStr}</span>
-                <span className="mx-1 text-white/30">/</span>
-                <span className="text-white/60">0{CASE_STUDIES.length}</span>
-              </div>
 
               <button
                 onClick={handleNext}

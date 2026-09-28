@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Send, 
-  Mail, 
   Check, 
   X, 
   Sparkles,
@@ -129,21 +128,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
               </p>
 
               {/* Main Button: “Trabajemos juntos →” */}
-              <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row sm:items-center gap-3">
+              <div className="mt-5 sm:mt-6">
                 <button
                   onClick={() => setIsFormOpen(true)}
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#ff7865] via-[#f47c7c] to-[#f7a072] px-6 py-3 text-sm sm:text-base font-extrabold text-[#13111a] shadow-lg shadow-[#ff7865]/25 hover:brightness-110 active:scale-95 transition-all"
                 >
                   <span>{t('contact.button')}</span>
                 </button>
-
-                <a
-                  href="mailto:soycreativadesi@gmail.com"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-xs sm:text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white transition-all"
-                >
-                  <Mail className="h-3.5 w-3.5 text-[#ff7865]" />
-                  <span>soycreativadesi@gmail.com</span>
-                </a>
               </div>
 
               {/* Sub-phrase: “Disponible para proyectos, sprints y colaboraciones de arte 2D.” */}

@@ -3,7 +3,9 @@ import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { 
   ArrowRight, 
   Eye, 
-  Sparkles 
+  Sparkles,
+  Pause,
+  Play
 } from 'lucide-react';
 import { IMAGES } from '../data/portfolioData';
 import { useLanguage } from '../context/LanguageContext';
@@ -75,19 +77,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 }) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [isAutoPlayPaused, setIsAutoPlayPaused] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const { language, t } = useLanguage();
 
   const currentSlide = HERO_SLIDES[currentSlideIndex];
 
-  // Auto-rotate every 9 seconds, resetting timer on user interaction
+  // Auto-rotate every 7 seconds, pausable via button
   useEffect(() => {
-    if (shouldReduceMotion) return;
+    if (shouldReduceMotion || isAutoPlayPaused) return;
     const interval = setInterval(() => {
       setCurrentSlideIndex((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, 9000);
+    }, 7000);
     return () => clearInterval(interval);
-  }, [currentSlideIndex, shouldReduceMotion]);
+  }, [currentSlideIndex, shouldReduceMotion, isAutoPlayPaused]);
 
   const handleSelectSlide = (idx: number) => {
     setCurrentSlideIndex(idx);
@@ -195,23 +198,43 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 </button>
               </div>
 
-              {/* Clean Minimal Project Navigation Dots */}
-              <div className="mt-7 flex items-center gap-2.5">
-                {HERO_SLIDES.map((slide, idx) => {
-                  const isActive = idx === currentSlideIndex;
-                  return (
-                    <button
-                      key={slide.id}
-                      onClick={() => handleSelectSlide(idx)}
-                      aria-label={`Proyecto ${slide.indexStr}`}
-                      className={`h-2.5 rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ff7865] ${
-                        isActive 
-                          ? 'w-8 bg-gradient-to-r from-[#ff7865] to-[#f6c177] shadow-sm' 
-                          : 'w-2.5 bg-white/25 hover:bg-white/55'
-                      }`}
-                    />
-                  );
-                })}
+              {/* Clean Minimal Project Navigation Dots + Stop / Play Button */}
+              <div className="mt-7 flex items-center gap-3">
+                <div className="flex items-center gap-2">
+                  {HERO_SLIDES.map((slide, idx) => {
+                    const isActive = idx === currentSlideIndex;
+                    return (
+                      <button
+                        key={slide.id}
+                        onClick={() => handleSelectSlide(idx)}
+                        aria-label={`Proyecto ${slide.indexStr}`}
+                        className={`h-2.5 rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ff7865] ${
+                          isActive 
+                            ? 'w-8 bg-gradient-to-r from-[#ff7865] to-[#f6c177] shadow-sm' 
+                            : 'w-2.5 bg-white/25 hover:bg-white/55'
+                        }`}
+                      />
+                    );
+                  })}
+                </div>
+
+                {/* Pause / Play icon-only button */}
+                <button
+                  onClick={() => setIsAutoPlayPaused((prev) => !prev)}
+                  aria-label={isAutoPlayPaused ? (language === 'en' ? 'Play' : 'Reanudar') : (language === 'en' ? 'Stop' : 'Detener')}
+                  title={isAutoPlayPaused ? (language === 'en' ? 'Play' : 'Reanudar') : (language === 'en' ? 'Stop' : 'Detener')}
+                  className={`flex h-6 w-6 items-center justify-center rounded-full border transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ff7865] ${
+                    isAutoPlayPaused
+                      ? 'border-[#ff7865]/60 bg-[#ff7865]/15 text-[#ff8a7a]'
+                      : 'border-white/15 bg-white/5 text-white/70 hover:border-white/30 hover:bg-white/10 hover:text-white'
+                  }`}
+                >
+                  {isAutoPlayPaused ? (
+                    <Play className="h-2.5 w-2.5 fill-current ml-0.5" />
+                  ) : (
+                    <Pause className="h-2.5 w-2.5 fill-current" />
+                  )}
+                </button>
               </div>
 
               {/* Mobile horizontal social row */}
