@@ -15,9 +15,10 @@ interface HeroSectionProps {
   onWorkTogetherClick: () => void;
   onSeeWorkClick: () => void;
   onExploreClick?: () => void;
+  onOpenProject?: (projectId: string) => void;
 }
 
-// 4 Featured Slides: 00 (Personal World) + 01 (Arcana Forge) + 02 (Twilight Haven) + 03 (Aetheria)
+// 5 Slides: 00 (Personal Intro) + 4 Real Projects: BrawlMart, Nuclear Kitty Games, Unwanted Games, Theme Hotel Tycoon
 const HERO_SLIDES = [
   {
     id: '00',
@@ -32,41 +33,58 @@ const HERO_SLIDES = [
   },
   {
     id: '01',
+    projectId: 'brawlmart',
     indexStr: '01',
-    titleEs: 'Arcana Forge RPG',
-    titleEn: 'Arcana Forge RPG',
-    subtitleEs: 'HUD táctil, menús de forja y sistema de inventario modular',
-    subtitleEn: 'Tactile HUD, forge crafting menus and modular inventory system',
+    titleEs: 'BrawlMart',
+    titleEn: 'BrawlMart',
+    subtitleEs: 'Game Logo · Key Art · Steam Store Assets (Red Basket Games · PlayWay S.A.)',
+    subtitleEn: 'Game Logo · Key Art · Steam Store Assets (Red Basket Games · PlayWay S.A.)',
     bgImage: IMAGES.heroBackground,
-    featuredArt: IMAGES.gameUi,
-    artAlt: 'Interfaz de usuario e inventario para Arcana Forge RPG',
+    featuredArt: IMAGES.promo,
+    artAlt: 'BrawlMart — Game Logo y Key Art',
     accentColor: '#ff7865',
     isPersonalWorld: false,
   },
   {
     id: '02',
+    projectId: 'nuclear-kitty-games',
     indexStr: '02',
-    titleEs: 'Twilight Haven',
-    titleEn: 'Twilight Haven',
-    subtitleEs: 'Bosque bioluminiscente con 5 capas de paralaje continuo',
-    subtitleEn: 'Bioluminescent forest with 5 seamless parallax layers',
-    bgImage: IMAGES.environment,
-    featuredArt: IMAGES.environment,
-    artAlt: 'Escenario bioluminiscente con capas de paralaje para Twilight Haven',
+    titleEs: 'Nuclear Kitty Games',
+    titleEn: 'Nuclear Kitty Games',
+    subtitleEs: 'Colaboración con el estudio · Game Logos · UI · Promotional Art',
+    subtitleEn: 'Studio Collaboration · Game Logos · UI · Promotional Art',
+    bgImage: IMAGES.heroBackground,
+    featuredArt: IMAGES.gameUi,
+    artAlt: 'Nuclear Kitty Games — Logos de videojuegos, UI y material promocional',
     accentColor: '#38bdf8',
     isPersonalWorld: false,
   },
   {
     id: '03',
+    projectId: 'unwanted-games',
     indexStr: '03',
-    titleEs: 'Aetheria: Chrono Quest',
-    titleEn: 'Aetheria: Chrono Quest',
-    subtitleEs: 'Hojas de modelo 360°, retratos y piezas para animación esquelética',
-    subtitleEn: '360° turnaround model sheets, portraits, and Spine rigs',
+    titleEs: 'Unwanted Games',
+    titleEn: 'Unwanted Games',
+    subtitleEs: 'Colaboración profesional · iGaming · Slot Art · UI · Game Assets',
+    subtitleEn: 'Professional Collaboration · iGaming · Slot Art · UI · Game Assets',
     bgImage: IMAGES.heroBackground,
-    featuredArt: IMAGES.characters,
-    artAlt: 'Hojas de personaje y turnaround para Aetheria',
+    featuredArt: IMAGES.assets,
+    artAlt: 'Unwanted Games — Slot Game Art, UI y Game Assets',
     accentColor: '#f6c177',
+    isPersonalWorld: false,
+  },
+  {
+    id: '04',
+    projectId: 'theme-hotel-tycoon',
+    indexStr: '04',
+    titleEs: 'Theme Hotel Tycoon',
+    titleEn: 'Theme Hotel Tycoon',
+    subtitleEs: 'Mobile Game Art · Logo · Game Assets',
+    subtitleEn: 'Mobile Game Art · Logo · Game Assets',
+    bgImage: IMAGES.environment,
+    featuredArt: IMAGES.environment,
+    artAlt: 'Theme Hotel Tycoon — Mobile Game Art y Diseño de Logo',
+    accentColor: '#34d399',
     isPersonalWorld: false,
   },
 ];
@@ -74,6 +92,7 @@ const HERO_SLIDES = [
 export const HeroSection: React.FC<HeroSectionProps> = ({
   onWorkTogetherClick,
   onSeeWorkClick,
+  onOpenProject,
 }) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -96,23 +115,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     setCurrentSlideIndex(idx);
   };
 
+  const handleProjectClick = () => {
+    if (currentSlide.projectId && onOpenProject) {
+      onOpenProject(currentSlide.projectId);
+    } else {
+      onSeeWorkClick();
+    }
+  };
+
   return (
     <section 
       id="home" 
-      className="relative flex min-h-[80vh] lg:min-h-[85vh] w-full items-center overflow-hidden bg-[#0c0a12] text-[#faf6f0]"
+      className="relative flex overflow-hidden bg-black text-[#faf6f0]"
     >
-      {/* 1. Left Vertical Social Media Sidebar (Petit Planet inspired placement) */}
-      <SocialSidebar layout="vertical" />
-
-      {/* 2. Living Background Landscape with Crossfade Transition */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <AnimatePresence mode="sync">
+      {/* Background layer */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+        <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide.id}
-            initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 1.03 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: shouldReduceMotion ? 0.2 : 0.85, ease: "easeOut" }}
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 0.35, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: shouldReduceMotion ? 0.2 : 0.8, ease: "easeOut" }}
             className="absolute inset-0"
           >
             <img
@@ -127,7 +151,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         {/* Ambient atmospheric vignettes & contrast shaders */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-black/20" />
-        <div className="absolute -bottom-1 inset-x-0 h-28 bg-gradient-to-t from-black via-black/80 to-transparent" />
+        <div className="absolute -bottom-1 inset-x-0 h-14 bg-gradient-to-t from-black via-black/80 to-transparent" />
       </div>
 
       {/* Ambient lighting spots */}
@@ -138,7 +162,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       <div className="pointer-events-none absolute top-1/2 right-10 h-[400px] w-[400px] rounded-full bg-[#f6c177]/15 blur-[130px] z-1" />
 
       {/* Main Container */}
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-4 sm:px-6 lg:px-8 lg:pl-16 py-12 sm:py-16 lg:py-20">
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-4 sm:px-6 lg:px-8 lg:pl-16 pt-8 sm:pt-10 lg:pt-12 pb-10 sm:pb-12 lg:pb-14">
         <div className="grid w-full items-center gap-8 lg:grid-cols-12 lg:gap-10">
           
           {/* ========================================================================= */}
@@ -190,11 +214,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 </button>
 
                 <button
-                  onClick={onSeeWorkClick}
-                  className="group inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/5 px-5 py-3 font-heading text-sm font-semibold text-[#faf6f0] backdrop-blur-md transition-all hover:border-[#ff8a7a]/60 hover:bg-white/10 hover:scale-102"
+                  onClick={currentSlide.isPersonalWorld ? onSeeWorkClick : handleProjectClick}
+                  className="group inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/5 px-5 py-3 font-heading text-sm font-semibold text-[#faf6f0] backdrop-blur-md transition-all hover:border-[#ff7865]/60 hover:bg-white/10 hover:scale-102"
                 >
-                  <Eye className="h-4 w-4 text-[#ff8a7a]" />
-                  <span>{currentSlide.isPersonalWorld ? t('hero.viewWork') : (language === 'en' ? 'Explore in Work' : 'Ver en Trabajo')}</span>
+                  <Eye className="h-4 w-4 text-[#ff7865]" />
+                  <span>
+                    {currentSlide.isPersonalWorld 
+                      ? (language === 'en' ? 'View Projects' : 'Ver Proyectos')
+                      : (language === 'en' ? 'Ver proyecto →' : 'Ver proyecto →')}
+                  </span>
                 </button>
               </div>
 
@@ -311,18 +339,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                         ease: 'easeInOut',
                       },
                     }}
-                    className="relative z-10 max-h-[380px] sm:max-h-[430px] lg:max-h-[460px] w-auto drop-shadow-[0_20px_35px_rgba(0,0,0,0.8)] filter"
+                    className="relative z-10 max-h-[300px] sm:max-h-[340px] lg:max-h-[370px] w-auto drop-shadow-[0_20px_35px_rgba(0,0,0,0.8)] filter"
                   >
                     <img
                       src={IMAGES.heroCharacter}
                       alt="DesiPatty — Asistente de Arte 2D para Videojuegos"
                       referrerPolicy="no-referrer"
-                      className="h-full w-auto max-h-[380px] sm:max-h-[430px] lg:max-h-[460px] object-contain"
+                      className="h-full w-auto max-h-[300px] sm:max-h-[340px] lg:max-h-[370px] object-contain"
                     />
                   </motion.div>
                 </motion.div>
               ) : (
-                /* SLIDES 01, 02, 03: Natural In-World Artwork Element (Zero Card / Zero Frame) */
+                /* SLIDES 01, 02, 03, 04: Real Projects Artwork Element */
                 <motion.div
                   key={currentSlide.id}
                   initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.96 }}
@@ -330,7 +358,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   exit={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.96 }}
                   transition={{ duration: shouldReduceMotion ? 0.2 : 0.45, ease: "easeOut" }}
                   className="relative flex items-center justify-center cursor-pointer select-none"
-                  onClick={onSeeWorkClick}
+                  onClick={handleProjectClick}
                 >
                   {/* Soft atmospheric ambient backlight glow */}
                   <div 
@@ -349,12 +377,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                       ease: 'easeInOut',
                     }}
                     whileHover={{ scale: 1.02 }}
-                    className="relative z-10 max-w-[460px] lg:max-w-[530px] w-full"
+                    className="relative z-10 max-w-[420px] lg:max-w-[480px] w-full"
                   >
                     <img
                       src={currentSlide.featuredArt}
                       alt={currentSlide.artAlt}
-                      className="w-full h-auto max-h-[380px] lg:max-h-[440px] object-contain drop-shadow-[0_15px_35px_rgba(0,0,0,0.7)]"
+                      className="w-full h-auto max-h-[280px] sm:max-h-[310px] lg:max-h-[340px] object-contain drop-shadow-[0_15px_35px_rgba(0,0,0,0.7)]"
                       style={{
                         maskImage: 'radial-gradient(ellipse 90% 82% at 50% 50%, black 55%, transparent 100%)',
                         WebkitMaskImage: 'radial-gradient(ellipse 90% 82% at 50% 50%, black 55%, transparent 100%)',

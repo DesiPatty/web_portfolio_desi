@@ -2,139 +2,185 @@ import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence, useInView, useReducedMotion } from 'motion/react';
 import { 
   Star, 
-  Sparkles, 
   ChevronLeft, 
   ChevronRight, 
   Gamepad2,
-  Layers
+  ExternalLink
 } from 'lucide-react';
 import { IMAGES } from '../data/portfolioData';
 import { useLanguage } from '../context/LanguageContext';
 
+// Official Steam vector icon
+const SteamIcon: React.FC<{ className?: string }> = ({ className = "h-4 w-4" }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+    <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.029 4.524 4.524s-2.03 4.524-4.524 4.524h-.105l-4.076 2.911c0 .052.005.105.005.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.155-3.331-2.693L.438 15.07C1.968 20.252 6.577 24 12.021 24c6.627 0 12-5.373 12-12s-5.373-12-12-12zM7.55 17.514c-.381.157-.8.244-1.239.244-1.229 0-2.264-.702-2.732-1.716l2.138.884c.489.202 1.05.034 1.348-.415.3-.448.243-1.042-.132-1.428l-2.18-.899c.355-.66.985-1.15 1.745-1.272l2.308 3.344c-.287.41-.716.79-1.256 1.258zm8.39-6.326c-1.253 0-2.269-1.016-2.269-2.269 0-1.252 1.016-2.268 2.269-2.268 1.252 0 2.268 1.016 2.268 2.268 0 1.253-1.016 2.269-2.268 2.269zm-1.89-2.269c0 1.044.846 1.89 1.89 1.89 1.043 0 1.89-.846 1.89-1.89 0-1.043-.847-1.89-1.89-1.89-1.044 0-1.89.847-1.89 1.89z" />
+  </svg>
+);
+
 // -------------------------------------------------------------
-// Testimonial Cases Data (4 cases matching portfolio assets)
+// Real Client Testimonials (ONLY REAL PROJECTS & ACCURATE DATA)
 // -------------------------------------------------------------
 const CASE_STUDIES = [
   {
-    id: 'elena-rostova',
+    id: 'aasalongino',
     indexStr: '01',
-    author: 'Elena Rostova',
-    role: 'Studio Founder & Producer',
-    studio: 'Gilded Spire Studios',
-    game: 'Arcana Forge RPG',
-    projectTag: 'Arcana Forge RPG · Interfaz & Spine',
-    badge: 'Steam Demo 2025',
-    image: IMAGES.gameUi,
-    imageAlt: 'Arte e interfaz de usuario para Arcana Forge RPG',
-    quote: 'Tener a Desi como asistente visual fue como tener una directora de arte senior directamente en nuestro Discord. Archivos impecables, cero drama y sus entregas para animaciones en Spine fueron perfectas.',
-    quoteEn: 'Having Desi as our visual assistant felt like having a senior art director right in our Discord. Organized files, zero drama, and her turnarounds for our Spine animations were completely flawless.',
-    rating: 5,
-    accentColor: '#ff7865',
-    avatarBg: 'from-[#ff7865]/20 to-[#f472b6]/20 border-[#ff7865]/40',
-    avatarSvg: (
-      <svg viewBox="0 0 48 48" className="h-full w-full" fill="none">
-        <circle cx="24" cy="24" r="23" fill="#231730" />
-        <circle cx="24" cy="18" r="13" fill="#382142" />
-        <circle cx="24" cy="9" r="6" fill="#382142" />
-        <circle cx="24" cy="21" r="10" fill="#fed7aa" />
-        <circle cx="20" cy="21" r="3.5" stroke="#f6c177" strokeWidth="1.2" fill="#ffffff" fillOpacity="0.2" />
-        <circle cx="28" cy="21" r="3.5" stroke="#f6c177" strokeWidth="1.2" fill="#ffffff" fillOpacity="0.2" />
-        <path d="M23.5 21H24.5" stroke="#f6c177" strokeWidth="1.2" />
-        <circle cx="20" cy="21" r="1" fill="#1f162b" />
-        <circle cx="28" cy="21" r="1" fill="#1f162b" />
-        <path d="M22 26Q24 28 26 26" stroke="#e11d48" strokeWidth="1.2" strokeLinecap="round" />
-        <path d="M12 44C12 34 18 31 24 31C30 31 36 34 36 44H12Z" fill="#ff7865" fillOpacity="0.85" />
-      </svg>
-    ),
-  },
-  {
-    id: 'kaelen-vance',
-    indexStr: '02',
-    author: 'Kaelen Vance',
-    role: 'Lead Developer',
-    studio: 'Moonlit Clockwork Games',
-    game: 'Aetheria: Chrono Quest',
-    projectTag: 'Aetheria: Chrono Quest · Personajes & Retratos',
-    badge: 'Kickstarter Funded 180%',
-    image: IMAGES.characters,
-    imageAlt: 'Diseño de personajes y retratos para Aetheria',
-    quote: 'DesiPatty se sumó a nuestro proyecto en Godot 3 semanas antes del deadline. Su kit de UI y retratos elevaron el juego de un prototipo básico a un showcase digno de Steam.',
-    quoteEn: 'DesiPatty jumped into our Godot project 3 weeks before our demo deadline. Her UI kit and character portraits completely elevated our game from looking like a prototype to a polished Steam showcase.',
+    author: 'Aasalongino',
+    country: 'Estados Unidos 🇺🇸',
+    countryEn: 'United States 🇺🇸',
+    project: 'Brawl Mart',
+    projectTitle: 'BrawlMart',
+    projectSubtitle: 'Game Logo · Key Art · Steam Store Assets',
+    projectSubtitleEn: 'Game Logo · Key Art · Steam Store Assets',
+    actionUrl: 'https://store.steampowered.com/app/2816980/BrawlMart/',
+    actionType: 'steam',
+    actionLabel: 'Ver en Steam',
+    actionLabelEn: 'View on Steam',
+    image: IMAGES.promo,
+    imageAlt: 'BrawlMart — Game Logo y Key Art en Steam',
+    quote: '¡Una de las mejores experiencias como comprador que he tenido hasta la fecha!',
+    quoteEn: "One of the best buyer experiences I've had to date!",
     rating: 5,
     accentColor: '#38bdf8',
-    avatarBg: 'from-[#38bdf8]/20 to-[#818cf8]/20 border-[#38bdf8]/40',
-    avatarSvg: (
-      <svg viewBox="0 0 48 48" className="h-full w-full" fill="none">
-        <circle cx="24" cy="24" r="23" fill="#141d33" />
-        <path d="M15 19C15 13 18 10 24 10C30 10 33 13 33 19V22H15V19Z" fill="#293b5e" />
-        <circle cx="24" cy="22" r="9.5" fill="#fed7aa" />
-        <path d="M13 22C13 15 35 15 35 22" stroke="#38bdf8" strokeWidth="2.5" strokeLinecap="round" />
-        <rect x="12" y="20" width="4" height="7" rx="2" fill="#818cf8" />
-        <rect x="32" y="20" width="4" height="7" rx="2" fill="#818cf8" />
-        <circle cx="20.5" cy="22" r="1.2" fill="#1e293b" />
-        <circle cx="27.5" cy="22" r="1.2" fill="#1e293b" />
-        <path d="M22 27Q24 29 26 27" stroke="#b45309" strokeWidth="1.2" strokeLinecap="round" />
-        <path d="M13 44C13 35 17 32 24 32C31 32 35 35 35 44H13Z" fill="#38bdf8" fillOpacity="0.8" />
-      </svg>
+    avatarBg: 'border-[#38bdf8]/50 shadow-[0_0_15px_rgba(56,189,248,0.25)]',
+    avatarContent: (
+      <div className="flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-[#1e3a8a] to-[#2563eb] font-heading text-base font-extrabold text-white">
+        A
+      </div>
     ),
   },
   {
-    id: 'marcus-thorne',
-    indexStr: '03',
-    author: 'Marcus Thorne',
-    role: 'Solo Indie Creator',
-    studio: 'Dicebox Realm',
-    game: 'Mystic Relics Deckbuilder',
-    projectTag: 'Mystic Relics Deckbuilder · Iconos & Props',
-    badge: 'Steam Early Access',
-    image: IMAGES.assets,
-    imageAlt: 'Set de iconos de inventario y objetos para Mystic Relics',
-    quote: 'Como desarrollador en solitario, el arte era mi gran cuello de botella. Desi entregó 32 iconos de objetos con mapas de normales y una iluminación coherente. Me ahorró dos meses de trabajo.',
-    quoteEn: 'As a solo dev, art was my ultimate bottleneck. Desi delivered 32 item icons with pixel-perfect normal maps and consistent lighting. Saved me at least two months of painful trial-and-error.',
+    id: 'pedrogonzalezbl',
+    indexStr: '02',
+    author: 'pedrogonzalezbl',
+    country: 'España 🇪🇸',
+    countryEn: 'Spain 🇪🇸',
+    project: 'Theme Hotel',
+    projectTitle: 'Theme Hotel Tycoon',
+    projectSubtitle: 'Mobile Game Art · Logo · Game Assets',
+    projectSubtitleEn: 'Mobile Game Art · Logo · Game Assets',
+    actionUrl: 'https://play.google.com/store/apps',
+    actionType: 'google-play',
+    actionLabel: 'Google Play',
+    actionLabelEn: 'Google Play',
+    image: IMAGES.environment,
+    imageAlt: 'Arte y logotipo para Theme Hotel Tycoon',
+    quote: 'Tercera vez que trabajo con Desiree. ¡Todo impecable!',
+    quoteEn: 'Third time working with Desiree. Everything flawless!',
     rating: 5,
     accentColor: '#f6c177',
-    avatarBg: 'from-[#f6c177]/20 to-[#ff7865]/20 border-[#f6c177]/40',
-    avatarSvg: (
-      <svg viewBox="0 0 48 48" className="h-full w-full" fill="none">
-        <circle cx="24" cy="24" r="23" fill="#261b17" />
-        <path d="M15 19C15 12 18 10 24 10C30 10 33 12 33 19H15Z" fill="#f6c177" />
-        <rect x="14" y="17" width="20" height="4" rx="2" fill="#d97706" />
-        <circle cx="24" cy="23" r="9.5" fill="#fcd34d" fillOpacity="0.9" />
-        <path d="M16 25C16 32 32 32 32 25C32 28 30 33 24 33C18 33 16 28 16 25Z" fill="#78350f" />
-        <circle cx="20.5" cy="22" r="1.2" fill="#1c1917" />
-        <circle cx="27.5" cy="22" r="1.2" fill="#1c1917" />
-        <path d="M22 28Q24 30 26 28" stroke="#ffffff" strokeWidth="1" strokeLinecap="round" />
-        <path d="M13 44C13 35 18 33 24 33C30 33 35 35 35 44H13Z" fill="#991b1b" />
-      </svg>
+    avatarBg: 'border-[#f6c177]/50 shadow-[0_0_15px_rgba(246,193,119,0.25)]',
+    avatarContent: (
+      <div className="flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-[#78350f] to-[#d97706] font-heading text-base font-extrabold text-white">
+        P
+      </div>
     ),
   },
   {
-    id: 'saffron-lin',
-    indexStr: '04',
-    author: 'Saffron Lin',
-    role: 'Creative Director',
-    studio: 'Neon Moth Interactive',
-    game: 'Twilight Haven',
-    projectTag: 'Twilight Haven · Fondos & Paralaje',
-    badge: 'Indie Megabooth Selection',
-    image: IMAGES.environment,
-    imageAlt: 'Escenario y fondos en paralaje para Twilight Haven',
-    quote: 'Se adaptó a nuestra guía de arte estilo acuarela desde el primer día. Los jugadores elogian constantemente los fondos con paralaje bioluminiscente que diseñó.',
-    quoteEn: 'She adapted to our watercolor art bible on day one. Our players constantly praise the bioluminescent parallax backgrounds she crafted. Highly recommended for any serious indie studio.',
+    id: 'norsefxltd',
+    indexStr: '03',
+    author: 'norsefxltd',
+    country: 'Reino Unido 🇬🇧',
+    countryEn: 'United Kingdom 🇬🇧',
+    project: 'Nuclear Kitty Games',
+    projectTitle: 'Nuclear Kitty Games',
+    projectSubtitle: 'Game Logos · UI · Promotional Art',
+    projectSubtitleEn: 'Game Logos · UI · Promotional Art',
+    actionUrl: 'https://nuclearkittygames.com/',
+    actionType: 'website',
+    actionLabel: 'Sitio oficial',
+    actionLabelEn: 'Official Site',
+    image: IMAGES.gameUi,
+    imageAlt: 'Logos y assets de UI para Nuclear Kitty Games',
+    quote: 'Genial volver a trabajar con ella otra vez.',
+    quoteEn: 'Great to Work With her again',
     rating: 5,
     accentColor: '#34d399',
-    avatarBg: 'from-[#34d399]/20 to-[#06b6d4]/20 border-[#34d399]/40',
-    avatarSvg: (
-      <svg viewBox="0 0 48 48" className="h-full w-full" fill="none">
-        <circle cx="24" cy="24" r="23" fill="#122421" />
-        <path d="M14 20C14 12 18 9 24 9C30 9 34 12 34 20V27C34 27 31 29 29 26C29 26 27 28 24 28C21 28 19 26 19 26C17 29 14 27 14 27V20Z" fill="#1e3a34" />
-        <circle cx="24" cy="21" r="9.5" fill="#fde68a" fillOpacity="0.9" />
-        <circle cx="14.5" cy="25" r="2" fill="#34d399" />
-        <circle cx="20.5" cy="21" r="1.2" fill="#064e3b" />
-        <circle cx="27.5" cy="21" r="1.2" fill="#064e3b" />
-        <path d="M22 26Q24 28 26 26" stroke="#059669" strokeWidth="1.2" strokeLinecap="round" />
-        <path d="M13 44C13 34 18 32 24 32C30 32 35 34 35 44H13Z" fill="#047857" />
-      </svg>
+    avatarBg: 'border-[#34d399]/50 shadow-[0_0_15px_rgba(52,211,153,0.25)]',
+    avatarContent: (
+      <div className="flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-[#064e3b] to-[#059669] font-heading text-base font-extrabold text-white">
+        N
+      </div>
+    ),
+  },
+  {
+    id: 'tonynewsom76',
+    indexStr: '04',
+    author: 'tonynewsom76',
+    country: 'Estados Unidos 🇺🇸',
+    countryEn: 'United States 🇺🇸',
+    project: 'Logo Design',
+    projectTitle: 'BrawlMart',
+    projectSubtitle: 'Diseño de Logo para Videojuegos',
+    projectSubtitleEn: 'Video Game Logo Design',
+    actionUrl: 'https://store.steampowered.com/app/2816980/BrawlMart/',
+    actionType: 'steam',
+    actionLabel: 'Ver en Steam',
+    actionLabelEn: 'View on Steam',
+    image: IMAGES.promo,
+    imageAlt: 'Diseño de logo para BrawlMart',
+    quote: '¡Experiencia fantástica! Entregó un logotipo limpio y creativo que superó mis expectativas. Este es mi segundo proyecto con ella, y una vez más fue profesional, receptiva y muy fácil de trabajar. ¡Muy recomendada!',
+    quoteEn: 'Fantastic experience! She delivered a clean, creative logo that exceeded my expectations. This is my second project with her, and she was once again professional, responsive, and easy to work with. Highly recommend!',
+    rating: 5,
+    accentColor: '#ff7865',
+    avatarBg: 'border-[#ec4899]/50 shadow-[0_0_15px_rgba(236,72,153,0.25)]',
+    avatarContent: (
+      <div className="flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-[#831843] to-[#be185d] font-heading text-base font-extrabold text-white">
+        T
+      </div>
+    ),
+  },
+  {
+    id: 'removloet',
+    indexStr: '05',
+    author: 'removloet',
+    country: 'Países Bajos 🇳🇱',
+    countryEn: 'Netherlands 🇳🇱',
+    project: 'Unwanted Games',
+    projectTitle: 'Unwanted Games',
+    projectSubtitle: 'iGaming · Slot Art · UI · Game Assets',
+    projectSubtitleEn: 'iGaming · Slot Art · UI · Game Assets',
+    actionUrl: 'https://unwantedgames.com/',
+    actionType: 'website',
+    actionLabel: 'Sitio oficial',
+    actionLabelEn: 'Official Site',
+    image: IMAGES.assets,
+    imageAlt: 'Arte y assets para Unwanted Games',
+    quote: 'Me encantó trabajar con ella, la recomiendo totalmente :D',
+    quoteEn: 'Loved working with her, can recommend her :D',
+    rating: 5,
+    accentColor: '#c084fc',
+    avatarBg: 'border-[#c084fc]/50 shadow-[0_0_15px_rgba(192,132,252,0.25)]',
+    avatarContent: (
+      <div className="flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-[#581c87] to-[#9333ea] font-heading text-base font-extrabold text-white">
+        R
+      </div>
+    ),
+  },
+  {
+    id: 'richard',
+    indexStr: '06',
+    author: 'Richard',
+    country: 'Estados Unidos 🇺🇸',
+    countryEn: 'United States 🇺🇸',
+    project: 'Game Art',
+    projectTitle: 'Theme Hotel Tycoon',
+    projectSubtitle: 'Mobile Game Art · Logo · Game Assets',
+    projectSubtitleEn: 'Mobile Game Art · Logo · Game Assets',
+    actionUrl: 'https://play.google.com/store/apps',
+    actionType: 'google-play',
+    actionLabel: 'Google Play',
+    actionLabelEn: 'Google Play',
+    image: IMAGES.environment,
+    imageAlt: 'Ilustración y diseño visual para videojuegos',
+    quote: 'Desi did a great job of taking my vague description and turning it into something really professional. I highly recommend.',
+    quoteEn: 'Desi did a great job of taking my vague description and turning it into something really professional. I highly recommend.',
+    rating: 5,
+    accentColor: '#38bdf8',
+    avatarBg: 'border-[#38bdf8]/50 shadow-[0_0_15px_rgba(56,189,248,0.25)]',
+    avatarContent: (
+      <div className="flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-[#0284c7] to-[#0ea5e9] font-heading text-base font-extrabold text-white">
+        R
+      </div>
     ),
   },
 ];
@@ -144,9 +190,8 @@ export const TestimonialsSection: React.FC = () => {
   const [direction, setDirection] = useState(1);
   const sectionRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
 
-  // Scroll in-view trigger with replayability when leaving and returning
   const isInView = useInView(sectionRef, {
     amount: 0.15,
     once: false,
@@ -161,11 +206,10 @@ export const TestimonialsSection: React.FC = () => {
 
   const handleNext = () => {
     setDirection(1);
-    setCurrentIndex((prev) => (prev === CASE_STUDIES.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) => (prev + 1) % CASE_STUDIES.length);
   };
 
   const handleSelect = (idx: number) => {
-    if (idx === currentIndex) return;
     setDirection(idx > currentIndex ? 1 : -1);
     setCurrentIndex(idx);
   };
@@ -174,21 +218,20 @@ export const TestimonialsSection: React.FC = () => {
     <section 
       id="testimonials" 
       ref={sectionRef}
-      className="relative py-12 lg:py-16 border-t border-white/5 bg-black text-[#faf6f0] overflow-hidden"
+      className="relative py-10 lg:py-14 border-t border-white/5 bg-[#0a0711] text-[#faf6f0] overflow-hidden"
     >
       {/* Background ambient lighting */}
       <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isInView ? 1 : 0 }}
+        animate={isInView ? { opacity: 1 } : { opacity: 0.2 }}
         transition={{ duration: shouldReduceMotion ? 0.2 : 0.8, ease: "easeOut" }}
         className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
       >
-        <div className="absolute top-1/4 left-1/3 h-[450px] w-[450px] rounded-full bg-gradient-to-br from-[#ff7865]/10 via-[#f472b6]/8 to-transparent blur-[150px]" />
-        <div className="absolute bottom-10 right-10 h-[400px] w-[400px] rounded-full bg-gradient-to-tr from-[#38bdf8]/10 via-[#818cf8]/8 to-transparent blur-[150px]" />
+        <div className="absolute top-1/4 left-1/3 h-[450px] w-[450px] rounded-full bg-gradient-to-br from-[#ec4899]/10 via-[#a855f7]/8 to-transparent blur-[150px]" />
+        <div className="absolute bottom-10 right-10 h-[400px] w-[400px] rounded-full bg-gradient-to-tr from-[#38bdf8]/10 via-[#6366f1]/8 to-transparent blur-[150px]" />
         
         {/* Subtle coordinate dot grid */}
         <div 
-          className="absolute inset-0 opacity-[0.025]"
+          className="absolute inset-0 opacity-[0.02]"
           style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, #ffffff 1px, transparent 0)`,
             backgroundSize: '36px 36px',
@@ -200,55 +243,56 @@ export const TestimonialsSection: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : -8 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : -8 }}
-            transition={{ duration: shouldReduceMotion ? 0.1 : 0.45, delay: shouldReduceMotion ? 0 : 0.05 }}
-            className="flex justify-center"
-          >
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#f6c177]/35 bg-[#f6c177]/10 px-3.5 py-0.5 text-xs font-semibold text-[#f6c177] shadow-md backdrop-blur-md">
-              <Sparkles className="h-3.5 w-3.5 text-[#ff8a7a]" />
-              <span>{t('testimonials.badge')}</span>
-              <span className="text-xs">✦</span>
-            </div>
-          </motion.div>
-
-          {/* Title */}
           <motion.h2 
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
-            transition={{ duration: shouldReduceMotion ? 0.1 : 0.55, delay: shouldReduceMotion ? 0 : 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-3.5 font-heading text-2xl font-extrabold tracking-tight text-[#faf6f0] sm:text-4xl lg:text-5xl leading-[1.12]"
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 14 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 14 }}
+            transition={{ duration: shouldReduceMotion ? 0.1 : 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight"
           >
-            {t('testimonials.titlePrefix')}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff7865] via-[#f472b6] to-[#f6c177]">
-              {t('testimonials.titleHighlight')}
-            </span>
+            {language === 'en' ? (
+              <>
+                What developers say who have{' '}
+                <span className="text-[#ff5c8a]">worked</span>
+                <br className="hidden sm:inline" />{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff7865] via-[#f472b6] to-[#f6c177]">
+                  with me
+                </span>
+              </>
+            ) : (
+              <>
+                Lo que dicen quienes han{' '}
+                <span className="text-[#ff5c8a]">trabajado</span>
+                <br className="hidden sm:inline" />{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff7865] via-[#f472b6] to-[#f6c177]">
+                  conmigo
+                </span>
+              </>
+            )}
           </motion.h2>
 
-          {/* Subtitle */}
-          <motion.p 
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
-            transition={{ duration: shouldReduceMotion ? 0.1 : 0.5, delay: shouldReduceMotion ? 0 : 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-3 text-sm sm:text-base text-white/75 leading-relaxed font-normal"
+          <motion.p
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 10 }}
+            transition={{ duration: shouldReduceMotion ? 0.1 : 0.45, delay: shouldReduceMotion ? 0 : 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-2 text-xs sm:text-sm text-white/75 font-normal max-w-xl mx-auto leading-relaxed"
           >
-            {t('testimonials.subtitle')}
+            {language === 'en' 
+              ? 'An inside look from the teams and creators I have collaborated with.'
+              : 'Una mirada desde dentro de los equipos con los que he colaborado.'}
           </motion.p>
         </div>
 
         {/* ========================================================================= */}
-        {/* MAIN SHOWCASE / SLIDER CARD: Compact layout & heights                    */}
+        {/* MAIN CASE STUDY CARD: Compact Height & Sleek Streamlined Layout           */}
         {/* ========================================================================= */}
         <motion.div
-          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 25, scale: shouldReduceMotion ? 1 : 0.98 }}
-          animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: shouldReduceMotion ? 0 : 25, scale: shouldReduceMotion ? 1 : 0.98 }}
-          transition={{ duration: shouldReduceMotion ? 0.2 : 0.65, delay: shouldReduceMotion ? 0 : 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 sm:mt-10 overflow-hidden rounded-[2rem] border border-white/12 bg-gradient-to-br from-[#181324] via-[#14101e] to-[#100d18] p-5 sm:p-7 shadow-2xl backdrop-blur-xl"
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20, scale: shouldReduceMotion ? 1 : 0.98 }}
+          animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: shouldReduceMotion ? 0 : 20, scale: shouldReduceMotion ? 1 : 0.98 }}
+          transition={{ duration: shouldReduceMotion ? 0.2 : 0.55, delay: shouldReduceMotion ? 0 : 0.15, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-6 sm:mt-8 overflow-hidden rounded-2xl sm:rounded-3xl border border-[#a855f7]/25 bg-gradient-to-br from-[#151122]/95 via-[#110e1c]/95 to-[#0b0814]/95 p-4 sm:p-5 lg:p-6 shadow-[0_20px_50px_rgba(0,0,0,0.7),0_0_35px_rgba(168,85,247,0.1)] backdrop-blur-2xl"
         >
-          {/* Animated Slider Content with AnimatePresence (Compact min-height: 340-380px) */}
-          <div className="relative min-h-[340px] sm:min-h-[360px] lg:min-h-[350px] flex items-center">
+          {/* Animated Slider Content with AnimatePresence */}
+          <div className="relative min-h-[290px] sm:min-h-[310px] lg:min-h-[320px] flex items-center">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={currentCase.id}
@@ -265,112 +309,134 @@ export const TestimonialsSection: React.FC = () => {
                   x: shouldReduceMotion ? 0 : (direction > 0 ? -16 : 16) 
                 }}
                 transition={{ 
-                  duration: shouldReduceMotion ? 0.15 : 0.4, 
+                  duration: shouldReduceMotion ? 0.15 : 0.35, 
                   ease: [0.22, 1, 0.36, 1] 
                 }}
-                className="w-full grid items-center gap-6 lg:grid-cols-12 lg:gap-8"
+                className="w-full grid items-center gap-5 lg:grid-cols-12 lg:gap-8"
               >
                 
-                {/* LADO IZQUIERDO — ARTE (50–55% del showcase) */}
-                <div className="lg:col-span-6 xl:col-span-7 relative flex flex-col justify-center">
-                  <div className="group relative overflow-hidden rounded-2xl border border-white/15 bg-[#0e0b16] shadow-2xl">
+                {/* ================================================================= */}
+                {/* LADO IZQUIERDO — PROYECTO (Imagen + Barra de Información limpia)  */}
+                {/* ================================================================= */}
+                <div className="lg:col-span-7 flex flex-col justify-center">
+                  <div className="group relative overflow-hidden rounded-xl sm:rounded-2xl border border-[#a855f7]/30 bg-[#0d0a16] shadow-xl transition-all duration-300">
                     
-                    {/* Glowing back-accent */}
+                    {/* Glowing backlight */}
                     <div 
                       className="pointer-events-none absolute -inset-1 opacity-20 blur-xl transition-opacity duration-500 group-hover:opacity-40"
                       style={{ background: currentCase.accentColor }}
                     />
 
-                    {/* Main Project Art Image */}
-                    <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-[#161222]">
+                    {/* 1. Imagen Grande del Proyecto */}
+                    <div className="relative aspect-[16/10] sm:aspect-[16/9.5] max-h-[220px] sm:max-h-[260px] w-full overflow-hidden bg-[#0c0914]">
                       <img
                         src={currentCase.image}
                         alt={currentCase.imageAlt}
-                        referrerPolicy="no-referrer"
-                        className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"
+                        className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-102"
                       />
                       
                       {/* Vignette gradients */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-                      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent" />
-                    </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent pointer-events-none" />
 
-                    {/* Top Project Label Pill */}
-                    <div className="absolute top-3 left-3 sm:top-3.5 sm:left-3.5 flex items-center gap-2 rounded-full border border-white/20 bg-black/75 px-3 py-1 text-xs font-bold text-white backdrop-blur-md shadow-md">
-                      <Gamepad2 className="h-3 w-3" style={{ color: currentCase.accentColor }} />
-                      <span className="font-heading tracking-wide text-[10px] sm:text-xs">
-                        {currentCase.game}
-                      </span>
-                    </div>
-
-                    {/* Top Right Milestone Badge */}
-                    <div className="absolute top-3 right-3 sm:top-3.5 sm:right-3.5 hidden sm:flex items-center gap-1.5 rounded-full border border-white/10 bg-white/10 px-2.5 py-0.5 text-[10px] font-mono text-white/80 backdrop-blur-md">
-                      <span>{currentCase.badge}</span>
-                    </div>
-
-                    {/* Bottom Project Asset Tag */}
-                    <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-3 sm:left-3 sm:right-3 flex items-center justify-between rounded-xl border border-white/12 bg-black/70 px-3 py-1.5 text-xs backdrop-blur-md">
-                      <div className="flex items-center gap-2 truncate">
-                        <Layers className="h-3 w-3 shrink-0" style={{ color: currentCase.accentColor }} />
-                        <span className="font-mono text-[10px] sm:text-xs text-white/90 truncate">
-                          {currentCase.projectTag}
-                        </span>
+                      {/* Floating Badge in Top-Left */}
+                      <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 flex items-center gap-1.5 rounded-full border border-white/20 bg-black/75 px-2.5 py-0.5 text-xs font-heading font-bold text-white shadow-md backdrop-blur-md">
+                        <Gamepad2 className="h-3 w-3 text-[#ff7865]" />
+                        <span className="tracking-wide text-[11px] sm:text-xs">{currentCase.projectTitle}</span>
                       </div>
-                      <span className="shrink-0 font-mono text-[9px] font-bold uppercase tracking-wider text-white/50 pl-2">
-                        {t('testimonials.assetShowcase')}
-                      </span>
+                    </div>
+
+                    {/* 2. Barra de Información del Proyecto + Botón de Acción */}
+                    <div className="relative z-10 border-t border-white/10 bg-[#0c0816]/95 px-3.5 sm:px-4 py-2.5 sm:py-3 backdrop-blur-md">
+                      <div className="flex items-center justify-between gap-3">
+                        
+                        {/* Izquierda: Nombre del proyecto + Categoría */}
+                        <div className="flex items-center gap-2 font-heading text-xs sm:text-sm font-bold text-white min-w-0">
+                          <Gamepad2 className="h-4 w-4 text-[#ff7865] shrink-0" />
+                          <span className="truncate">
+                            {currentCase.projectTitle}
+                            <span className="mx-1.5 text-white/40 font-normal">•</span>
+                            <span className="font-semibold text-white/90">
+                              {language === 'en' ? currentCase.projectSubtitleEn : currentCase.projectSubtitle}
+                            </span>
+                          </span>
+                        </div>
+
+                        {/* Derecha: Botón oficial de Steam o enlace externo */}
+                        <div className="shrink-0">
+                          <a
+                            href={currentCase.actionUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group/steam inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#ffe8e0] via-[#ffdcd2] to-[#ffd0c2] px-3 sm:px-4 py-1.5 font-heading text-xs font-extrabold text-[#151122] shadow-sm transition-all duration-200 hover:scale-102 hover:brightness-105 active:scale-97 whitespace-nowrap"
+                            title={language === 'en' ? currentCase.actionLabelEn : currentCase.actionLabel}
+                          >
+                            {currentCase.actionType === 'steam' ? (
+                              <SteamIcon className="h-3.5 w-3.5 text-[#151122] transition-transform group-hover/steam:rotate-6" />
+                            ) : (
+                              <ExternalLink className="h-3.5 w-3.5 text-[#151122]" />
+                            )}
+                            <span>{language === 'en' ? currentCase.actionLabelEn : currentCase.actionLabel}</span>
+                            <span className="text-[11px] transition-transform group-hover/steam:translate-x-0.5">↗</span>
+                          </a>
+                        </div>
+
+                      </div>
                     </div>
 
                   </div>
                 </div>
 
-                {/* LADO DERECHO — TESTIMONIO Y CLIENTE (45–50%) */}
-                <div className="lg:col-span-6 xl:col-span-5 flex flex-col justify-between space-y-4 lg:pl-1">
+                {/* ================================================================= */}
+                {/* LADO DERECHO — TESTIMONIO DE LA PERSONA EN EL ORDEN EXACTO        */}
+                {/* 1. Nombre                                                         */}
+                {/* 2. País                                                           */}
+                {/* 3. Proyecto (ej. Brawl Mart)                                      */}
+                {/* 4. Número de estrellas                                            */}
+                {/* 5. Testimonio                                                     */}
+                {/* ================================================================= */}
+                <div className="lg:col-span-5 flex flex-col justify-between space-y-3 sm:space-y-4 lg:pl-1">
                   
-                  {/* Top Row: Small Client Avatar + Name + Role */}
+                  {/* Top: Avatar + 1. Nombre + 2. País + 3. Proyecto */}
                   <div className="flex items-center gap-3">
-                    <div className={`relative h-11 w-11 sm:h-12 sm:w-12 shrink-0 overflow-hidden rounded-full border-2 ${currentCase.avatarBg} shadow-lg p-0.5`}>
-                      {currentCase.avatarSvg}
+                    {/* Avatar or Initial Badge with Glow Ring */}
+                    <div className={`relative h-11 w-11 sm:h-12 sm:w-12 shrink-0 overflow-hidden rounded-full border-2 ${currentCase.avatarBg} bg-[#231535] p-0.5 shadow-md`}>
+                      {currentCase.avatarContent}
                     </div>
 
-                    <div className="overflow-hidden">
-                      <h4 className="font-heading text-base font-bold text-white leading-tight truncate">
+                    <div className="min-w-0 flex-1">
+                      {/* 1. Nombre */}
+                      <h3 className="font-heading text-base sm:text-lg font-extrabold text-white leading-tight truncate">
                         {currentCase.author}
-                      </h4>
-                      <p className="text-xs font-medium text-white/75 truncate" style={{ color: currentCase.accentColor }}>
-                        {currentCase.role}
-                      </p>
-                      <p className="text-[10px] font-mono text-white/50 truncate">
-                        {currentCase.studio}
-                      </p>
+                      </h3>
+                      {/* 2. País */}
+                      {currentCase.country && (
+                        <p className="text-xs font-semibold text-[#f47c7c] truncate mt-0.5">
+                          {language === 'en' ? currentCase.countryEn : currentCase.country}
+                        </p>
+                      )}
+                      {/* 3. Proyecto */}
+                      {currentCase.project && (
+                        <p className="text-xs font-heading font-semibold text-white/80 truncate mt-0.5">
+                          {currentCase.project}
+                        </p>
+                      )}
                     </div>
                   </div>
 
-                  {/* 5 Golden Stars */}
-                  <div className="flex items-center gap-1 text-[#f6c177]">
+                  {/* 4. Número de estrellas */}
+                  <div className="flex items-center gap-1 text-[#f6c177] pt-0.5">
                     {[...Array(currentCase.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-current" />
+                      <Star key={i} className="h-3.5 w-3.5 sm:h-4 sm:w-4 fill-[#f6c177]" />
                     ))}
                   </div>
 
-                  {/* Testimonial Quote */}
-                  <blockquote className="relative">
-                    <p className="font-heading text-sm sm:text-base lg:text-lg font-normal leading-relaxed text-[#faf6f0]/95 italic">
+                  {/* 5. Testimonio */}
+                  <blockquote className="relative my-0.5">
+                    <p className="font-heading text-xs sm:text-sm lg:text-[15px] font-normal leading-relaxed text-[#faf6f0]/95 italic">
                       “{language === 'en' ? currentCase.quoteEn : currentCase.quote}”
                     </p>
                   </blockquote>
-
-                  {/* Footer Client Reference */}
-                  <div className="pt-2 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs">
-                    <div>
-                      <span className="font-bold text-white text-[11px] sm:text-xs">{currentCase.author}</span>
-                      <span className="text-white/40 mx-1.5">•</span>
-                      <span className="text-white/65 text-[11px] sm:text-xs">{currentCase.role}</span>
-                    </div>
-                    <span className="font-mono text-[10px] text-white/50">
-                      {currentCase.studio}
-                    </span>
-                  </div>
 
                 </div>
 
@@ -379,12 +445,12 @@ export const TestimonialsSection: React.FC = () => {
           </div>
 
           {/* ========================================================================= */}
-          {/* SLIDER NAVIGATION: ← 01 / 04 → + Indicator Dots                          */}
+          {/* SLIDER NAVIGATION: Paginator Dots (Left) + Arrow Buttons (Right)          */}
           {/* ========================================================================= */}
-          <div className="mt-5 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="mt-4 pt-3.5 border-t border-white/10 flex items-center justify-between">
             
-            {/* Quick Case Study Dots (● ○ ○ ○) */}
-            <div className="flex items-center gap-1.5">
+            {/* Quick Case Study Dots */}
+            <div className="flex items-center gap-2">
               {CASE_STUDIES.map((c, idx) => {
                 const isActive = idx === currentIndex;
                 return (
@@ -392,37 +458,35 @@ export const TestimonialsSection: React.FC = () => {
                     key={c.id}
                     onClick={() => handleSelect(idx)}
                     aria-label={`Ver testimonio de ${c.author}`}
-                    className={`h-2 rounded-full transition-all duration-300 ${
+                    className={`h-2 rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ff7865] ${
                       isActive 
-                        ? 'w-7 bg-gradient-to-r from-[#ff7865] to-[#f6c177]' 
-                        : 'w-2 bg-white/20 hover:bg-white/40'
+                        ? 'w-7 bg-gradient-to-r from-[#ff7865] to-[#f472b6] shadow-sm' 
+                        : 'w-2 bg-white/20 hover:bg-white/45'
                     }`}
                   />
                 );
               })}
             </div>
 
-            {/* Stepper Navigation: ← → (Only arrows, no numbers) */}
+            {/* Stepper Navigation: Circular Arrows [ < ] and [ > ] */}
             <div className="flex items-center gap-2">
               <button
                 onClick={handlePrev}
                 aria-label="Testimonio anterior"
-                className="flex h-8 w-8 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-white/80 transition-all hover:border-white/30 hover:bg-white/10 hover:text-white active:scale-95"
+                className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80 transition-all hover:border-white/30 hover:bg-white/15 hover:text-white active:scale-92 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ff7865]"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
-
               <button
                 onClick={handleNext}
                 aria-label="Siguiente testimonio"
-                className="flex h-8 w-8 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-white/80 transition-all hover:border-white/30 hover:bg-white/10 hover:text-white active:scale-95"
+                className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80 transition-all hover:border-white/30 hover:bg-white/15 hover:text-white active:scale-92 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ff7865]"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
             </div>
 
           </div>
-
         </motion.div>
 
       </div>

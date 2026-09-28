@@ -18,19 +18,19 @@ interface ServicesSectionProps {
   onSelectService: (service: ServiceItem) => void;
 }
 
-// Map service id to relevant portfolio sample
+// Map service id to relevant real portfolio project
 const SERVICE_PORTFOLIO_MAP: Record<string, string> = {
-  'game-ui': 'arcana-forge-ui',
-  'characters': 'chronicles-characters',
-  'game-assets': 'mystic-relics-assets',
-  'environments': 'twilight-haven-environment',
-  '2d-animation': 'pixel-odyssey-animation',
-  'promo-art': 'skyship-voyager-promo',
-  'character-concept': 'chronicles-characters',
-  'item-sprites': 'mystic-relics-assets',
-  'environment-art': 'twilight-haven-environment',
-  'animation-rigging': 'pixel-odyssey-animation',
-  'marketing-art': 'skyship-voyager-promo',
+  'game-ui': 'nuclear-kitty-games',
+  'characters': 'unwanted-games',
+  'game-assets': 'unwanted-games',
+  'environments': 'theme-hotel-tycoon',
+  '2d-animation': 'nuclear-kitty-games',
+  'promo-art': 'brawlmart',
+  'character-concept': 'unwanted-games',
+  'item-sprites': 'unwanted-games',
+  'environment-art': 'theme-hotel-tycoon',
+  'animation-rigging': 'nuclear-kitty-games',
+  'marketing-art': 'brawlmart',
 };
 
 export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectService }) => {
@@ -38,7 +38,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
   const { language, t } = useLanguage();
 
   const handleOpenArtSpec = (serviceId: string) => {
-    const portfolioId = SERVICE_PORTFOLIO_MAP[serviceId] || 'arcana-forge-ui';
+    const portfolioId = SERVICE_PORTFOLIO_MAP[serviceId] || 'brawlmart';
     const found = PORTFOLIO_ITEMS.find((item) => item.id === portfolioId) || PORTFOLIO_ITEMS[0];
     setSelectedPortfolioItem(found);
   };
@@ -213,7 +213,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
               <div className="flex items-center justify-between border-b border-white/10 bg-[#120f1c] px-5 py-3">
                 <div>
                   <span className="font-mono text-[10px] text-[#ff8a7a] uppercase font-bold tracking-wider">
-                    {selectedPortfolioItem.gameType}
+                    {selectedPortfolioItem.categoryLabel}
                   </span>
                   <h3 className="font-heading text-base font-bold text-white">
                     {selectedPortfolioItem.title}

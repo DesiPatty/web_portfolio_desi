@@ -137,12 +137,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                 </button>
               </div>
 
-              {/* Sub-phrase: “Disponible para proyectos, sprints y colaboraciones de arte 2D.” */}
-              <div className="mt-4 flex items-center gap-2 text-xs sm:text-sm text-white/55">
-                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>{t('contact.subphrase')}</span>
-              </div>
-
             </div>
 
             {/* RIGHT COLUMN: Small Graphic Asset of Desi Game Artist */}

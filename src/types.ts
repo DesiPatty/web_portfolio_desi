@@ -1,27 +1,41 @@
-export type Category = 'all' | 'ui' | 'characters' | 'assets' | 'environments' | 'animation' | 'promo';
+export type Category = 'all' | 'ui' | 'characters' | 'assets' | 'environments' | 'animation' | 'promo' | 'logos';
 
 export interface PortfolioItem {
   id: string;
   title: string;
-  category: Category;
+  category: string;
   categoryLabel: string;
-  gameGenre: string;
+  categoryLabelEn?: string;
+  collaborationType?: string;
+  collaborationTypeEn?: string;
+  developer?: string;
+  publisher?: string;
+  myWork: string[];
+  myWorkEn?: string[];
   image: string;
-  description: string;
+  imageAlt?: string;
+  externalLink: {
+    label: string;
+    labelEn: string;
+    url: string;
+    platform?: 'steam' | 'google-play' | 'website';
+  };
+  description?: string;
+  descriptionEn?: string;
   year?: string;
   client?: string;
   tags?: string[];
-  whatIDeveloped: string[];
-  specs: {
-    resolution: string;
-    formats: string[];
-    tools: string[];
+  whatIDeveloped?: string[];
+  specs?: {
+    resolution?: string;
+    formats?: string[];
+    tools?: string[];
     pipelineStage?: string;
   };
-  productionReady: string[];
-  colorPalette: string[];
+  productionReady?: string[];
+  colorPalette?: string[];
   features?: string[];
-  deliverables: string[];
+  deliverables?: string[];
 }
 
 export interface ServiceItem {
@@ -76,8 +90,8 @@ export interface TestimonialItem {
   role: string;
   studio: string;
   game: string;
-  gameBadge: string;
-  avatarSeed: string;
+  gameBadge?: string;
+  avatarSeed?: string;
   rating: number;
 }
 

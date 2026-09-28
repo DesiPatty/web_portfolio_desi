@@ -14,7 +14,7 @@ const DICTIONARY: Record<Language, Record<string, string>> = {
     // Navbar (4 main sections)
     'nav.home': 'Inicio',
     'nav.about': 'Sobre Mí',
-    'nav.work': 'Trabajo',
+    'nav.work': 'Proyectos',
     'nav.contact': 'Contacto',
     'nav.services': 'Servicios',
     'nav.process': 'Procesos',
@@ -119,10 +119,12 @@ const DICTIONARY: Record<Language, Record<string, string>> = {
     'gift.previewBtn': 'Ver Vista Previa',
 
     // FAQ
-    'faq.badge': '07 • Dudas Frecuentes',
-    'faq.title': 'Preguntas y Respuestas Clave',
-    'faq.subtitle': 'Respuestas directas sobre colaboración, entregables, motores de juego y calendarios.',
-    'faq.searchPlaceholder': 'Buscar duda (ej: Unity, pagos, Discord, estilo)...',
+    'faq.badge': '07 • Preguntas Frecuentes',
+    'faq.title': 'Preguntas y Respuestas',
+    'faq.subtitle': 'Todo lo que necesitas saber sobre cómo me integro a tu pipeline: formas de contratación, formatos de entrega, tarifas y comunicación.',
+    'faq.ctaTitle': '¿Tienes un proyecto en mente?',
+    'faq.ctaText': 'Cuéntame qué necesitas y vemos cómo puedo integrarme a tu pipeline.',
+    'faq.ctaBtn': 'Hablemos de tu juego →',
 
     // Contact
     'contact.badge': 'Contacto',
@@ -140,7 +142,7 @@ const DICTIONARY: Record<Language, Record<string, string>> = {
     // Navbar (4 main sections)
     'nav.home': 'Home',
     'nav.about': 'About',
-    'nav.work': 'Work',
+    'nav.work': 'Projects',
     'nav.contact': 'Contact',
     'nav.services': 'Services',
     'nav.process': 'Process',
@@ -247,8 +249,10 @@ const DICTIONARY: Record<Language, Record<string, string>> = {
     // FAQ
     'faq.badge': '07 • FAQ',
     'faq.title': 'Frequently Asked Questions',
-    'faq.subtitle': 'Direct answers about workflows, engine formats, revision rounds, and pricing.',
-    'faq.searchPlaceholder': 'Search questions (e.g. Unity, payments, Discord, style)...',
+    'faq.subtitle': 'Everything you need to know about integrating with your pipeline: hiring formats, deliverables, rates, and communication.',
+    'faq.ctaTitle': 'Have a project in mind?',
+    'faq.ctaText': 'Tell me what you need and let’s see how I can integrate into your pipeline.',
+    'faq.ctaBtn': 'Let’s talk about your game →',
 
     // Contact
     'contact.badge': 'Contact',
